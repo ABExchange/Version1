@@ -5,5 +5,8 @@ import org.exchangesystem.model.ExchangeUser;
 
 public interface ExchangeUserDao extends Dao<ExchangeUser>{
 
+	public ExchangeUser findUser(String email);
+
+
 
 }

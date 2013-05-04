@@ -9,12 +9,24 @@
 	<name>web</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+		 <dependency>
+                      <groupId>junit</groupId>
+                      <artifactId>junit</artifactId>
+                       <version>4.8.1</version>
+                         <scope>test</scope>
+                 </dependency>
+                 <dependency>
+                     <groupId>org.mockito</groupId>
+                     <artifactId>mockito-core</artifactId>
+                     <version>1.8.2</version>
+                     <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                   <artifactId>spring-test</artifactId>
+                   <version>3.1.0.RELEASE</version>
+                   <scope>test</scope>
+                </dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -69,6 +81,21 @@
 			<artifactId>spring-orm</artifactId>
 			<version>3.1.0.RELEASE</version>
 		</dependency>
+		 <dependency>
+		   <groupId>org.springframework.security</groupId>
+		   <artifactId>spring-security-core</artifactId>
+		   <version>3.1.0.RELEASE</version>
+		 </dependency>
+		 <dependency>
+		   <groupId>org.springframework.security</groupId>
+		   <artifactId>spring-security-config</artifactId>
+		   <version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+		        <groupId>org.springframework.security</groupId>
+		        <artifactId>spring-security-web</artifactId>
+		        <version>3.1.0.RELEASE</version>
+	        </dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -132,6 +159,11 @@
 	<artifactId>slf4j-api</artifactId>
 	<version>1.7.2</version>
 </dependency>
+			  <dependency>
+				          <groupId>org.slf4j</groupId>
+					          <artifactId>slf4j-log4j12</artifactId>
+						          <version>1.7.2</version>
+							      </dependency>
 
 	<dependency>
 		<groupId>joda-time</groupId>

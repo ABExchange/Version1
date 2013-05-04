@@ -14,5 +14,9 @@ public interface ExchangeUserService {
 	public void remove(ExchangeUser exchangeU);
 
 	public void update(ExchangeUser exchangeU);
+	
+	public ExchangeUser saveReturnEntity(final ExchangeUser exchangeUser);
+	public ExchangeUser findUser(String email);
+
 
 }

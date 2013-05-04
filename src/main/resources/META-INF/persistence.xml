@@ -10,7 +10,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- JPA entities must be registered here -->
-		<class>org.exchangesystem.model.ExchangeUser</class>	
+		<class>org.exchangesystem.model.ExchangeUser</class>
+		<class>org.exchangesystem.model.UserRole</class>
+		<class>org.exchangesystem.model.Symbol</class>	
 	
 		<properties>
         

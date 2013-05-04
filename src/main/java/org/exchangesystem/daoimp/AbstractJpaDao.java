@@ -24,7 +24,7 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 	
 	
 	
-	public void setProjectManagerSession(ExchangeSystemSession exchangeManagerSession){
+	public void setExchangeManagerSession(ExchangeSystemSession exchangeManagerSession){
 		this.exchangeManagerSession = exchangeManagerSession;
 	}
 	
@@ -56,7 +56,7 @@ public abstract class AbstractJpaDao <T extends DomainObject> {
 		entity.setCreatedBy(exchangeManagerSession.getUser());
 		//entity.setCreatedBy(ProjectManagerSession.getUser());
 		entityManager.merge(entity);
-		entityManager.flush();
+		//entityManager.flush();
 	}
 	
 	//@Transactional

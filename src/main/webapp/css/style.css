@@ -16,3 +16,9 @@
 	bottom: 10px;
 	color: blue;
 }
+
+
+user agent stylesheettd,th {
+	display: table-cell;
+	vertical-align: inherit;
+}

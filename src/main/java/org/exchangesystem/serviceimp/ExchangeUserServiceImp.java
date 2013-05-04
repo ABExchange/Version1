@@ -44,4 +44,14 @@ public class ExchangeUserServiceImp implements ExchangeUserService {
 		userDao.update(exchangeUser);
 	}
 
+	@Transactional
+	public ExchangeUser saveReturnEntity(ExchangeUser exchangeUser) {
+		return userDao.saveReturnEntity(exchangeUser);
+	}
+
+	@Transactional
+	public ExchangeUser findUser(String email) {
+		return userDao.findUser(email);
+	}
+
 }
