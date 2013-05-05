@@ -2,14 +2,12 @@ package org.exchangesystem.serviceimp;
 
 import java.util.List;
 
-import net.sf.ehcache.config.CacheConfiguration.TransactionalMode;
-
 import org.apache.log4j.Logger;
 import org.exchangesystem.dao.TradeOrderDao;
 import org.exchangesystem.model.BTCRate;
+import org.exchangesystem.model.ExchangeUser;
 import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderTransaction;
-import org.exchangesystem.model.OrderTransactionType;
 import org.exchangesystem.model.OrderType;
 import org.exchangesystem.model.Symbol;
 import org.exchangesystem.model.TradeOrder;
@@ -1057,6 +1055,11 @@ public class TradeOrderServiceImp implements TradeOrderService {
 			logger.info("No Order transaction record !!!");
 		}
 	
+	}
+
+	public List<TradeOrder> findAllUnclosed(OrderStatus orderStatus,
+			ExchangeUser exchangeUser) {
+		return tradeOrderDao.findAllUnclosed(orderStatus, exchangeUser);
 	}
 
 	

@@ -2,6 +2,7 @@ package org.exchangesystem.web;
 
 import java.util.List;
 
+import org.exchangesystem.daoimp.ExchangeSystemSession;
 import org.exchangesystem.model.Bank;
 import org.exchangesystem.model.Country;
 import org.exchangesystem.model.Deposit;
@@ -41,6 +42,9 @@ public class AccountController {
 	@Autowired
 	WithdrawalService withdrawalService;
 	
+	@Autowired
+	ExchangeSystemSession exchangeSystemSession;
+	
 	@RequestMapping(value="/accounts", method=RequestMethod.GET)
 	public String account(@ModelAttribute("deposit") Deposit deposit, @ModelAttribute("bank") Bank bank, @ModelAttribute("withdrawal") Withdrawal withdrawal, Model model) {
 		
@@ -61,6 +65,8 @@ public class AccountController {
 		model.addAttribute("transferMethodList", transferMethodList);
 		model.addAttribute("depositList", depositList);
 		model.addAttribute("withdrawalList", withdrawalList);
+		model.addAttribute("user", exchangeSystemSession.getUser());
+
 
 		return "account";
 	}

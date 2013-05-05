@@ -42,18 +42,17 @@ public class TradeController {
 		logger.info(" MMMMMMMMMMMMMM The number of symbols is :::::  "+symbolList.size());
 		
 		tradeOrder = new TradeOrder();
-		model.addAttribute("tradeOrder", tradeOrder);
-		model.addAttribute("symbolList", symbolList);
+		model.addAttribute("tradeOrder", tradeOrder);		model.addAttribute("symbolList", symbolList);
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
 		
 //		List<TradeOrder> listOrder = tradeOrderService.findAll(OrderStatus.OPEN);
 		
 		//Get all the Orders that are not closed - includes open and partial
-		List<TradeOrder> listOrder = tradeOrderService.findAllUnclosed(OrderStatus.CLOSED);
+		List<TradeOrder> listOrder = tradeOrderService.findAllUnclosed(OrderStatus.CLOSED, exchangeSystemSession.getUser());
 
 		
-		List<OrderTransaction> listOrderTransaction = orderTransactionService.findAll();
+		List<OrderTransaction> listOrderTransaction = orderTransactionService.findAll(exchangeSystemSession.getUser());
 		model.addAttribute("listOrder", listOrder);
 		model.addAttribute("listOrderTransaction", listOrderTransaction);
 
@@ -79,7 +78,7 @@ public class TradeController {
 		model.addAttribute("user", exchangeSystemSession.getUser());
 
 
-		List<TradeOrder> listOrder = tradeOrderService.findAll();
+		List<TradeOrder> listOrder = tradeOrderService.findAllUnclosed(OrderStatus.OPEN, exchangeSystemSession.getUser()); //.findAll(exchangeSystemSession.getUser());
 		model.addAttribute("listOrder", listOrder);
 
 		return "redirect:/trade";
@@ -100,7 +99,8 @@ public class TradeController {
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
 
-		List<TradeOrder> listOrder = tradeOrderService.findAll();
+		//List<TradeOrder> listOrder = tradeOrderService.findAll();
+		List<TradeOrder> listOrder = tradeOrderService.findAllUnclosed(OrderStatus.OPEN, exchangeSystemSession.getUser());
 		model.addAttribute("listOrder", listOrder);
 
 		

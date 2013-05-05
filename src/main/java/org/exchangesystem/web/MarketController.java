@@ -2,6 +2,7 @@ package org.exchangesystem.web;
 
 import java.util.List;
 
+import org.exchangesystem.daoimp.ExchangeSystemSession;
 import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderType;
@@ -26,6 +27,10 @@ public class MarketController {
 	
 	@Autowired
 	OrderTransactionService orderTransactionService;
+	
+	@Autowired
+	ExchangeSystemSession exchangeSystemSession;
+
 	
 	@RequestMapping(value="/markets", method=RequestMethod.GET)
 	public String market(Model model){
@@ -69,7 +74,12 @@ public class MarketController {
 		//Get CAD Open Sell Order
 		List<TradeOrder> listCADSellOrder = tradeOrderService.findOpenPartialSellOrdersNewestFirst(cadSymbol, OrderType.SELL, OrderStatus.OPEN, OrderStatus.PARTIAL);
 	
+		List<OrderTransaction> listOrderTransaction = orderTransactionService.findAll();
+		model.addAttribute("listOrderTransaction", listOrderTransaction);
+
 		
+		model.addAttribute("user", exchangeSystemSession.getUser());
+
 		model.addAttribute("listUSDTransaction", listUSDTransaction);
 		model.addAttribute("listUSDBuyOrder", listUSDBuyOrder);
 		model.addAttribute("listUSDSellOrder", listUSDSellOrder);
@@ -79,6 +89,8 @@ public class MarketController {
 		model.addAttribute("listCADBuyOrder", listCADBuyOrder);
 		model.addAttribute("listCADSellOrder", listCADSellOrder);
 		
+		List<TradeOrder> listOrder = tradeOrderService.findAll(OrderStatus.OPEN);
+		model.addAttribute("listOrder", listOrder);
 		
 		
 		return "market";

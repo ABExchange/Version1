@@ -284,7 +284,7 @@
 				<div class="trade tradehistory">
 					<br /> <br />
 					<h3>
-						Trade History</ h3> <br />
+						Trade History</h3> <br />
 											<table class="table table-striped">
 						<!-- thead>
 							<tr>

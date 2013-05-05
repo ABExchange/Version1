@@ -20,6 +20,7 @@
 		<intercept-url pattern="/main*" access="ROLE_USER" />
 		<intercept-url pattern="/account*" access="ROLE_USER" />
 		<intercept-url pattern="/trade*" access="ROLE_USER" />
+		<intercept-url pattern="/markets*" access="ROLE_USER" />
 		
 		<!-- intercept-url pattern="/" access="ROLE_USER" / -->
 		<form-login login-page="/user/login" 

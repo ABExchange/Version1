@@ -3,8 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mytags"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.text.*"%>
 <html>
 <head>
 <title>Exchange System</title>
@@ -66,6 +67,8 @@
 				<ul class="nav nav-tabs">
 					<li class="marketUSD active"><a href="">USD</a></li>
 					<li class="marketCAD"><a href="">CAD</a></li>
+					<li class="marketHistory"><a href="">Market History</a></li>
+					<li class="allOpenOrders"><a href="">All Open Orders</a></li>
 					<!-- li class="accountWithdrawal"><a href="">Withdraw </a></li>
 					<li class="accountBankAccounts"><a href="">Bank Accounts </a></li>
 					<li class="accountHistory"><a href="">History </a></li -->
@@ -75,7 +78,7 @@
 					<h3>USD/BTC Rates</h3>
 					<br />
 					<div class="row">
-						<div class="span6">
+						<div class="span4">
 							<!-- Latest Trades Start-->
 							<br />
 							<h3 class="marketheader">LATES TRADES</h3>
@@ -84,19 +87,23 @@
 
 								<table class="table table-striped bordertable">
 									<tr>
-										<td class="highersell">BTC</td>
-										<td class="highersell">PRICE/BTC</td>
-										<td class="highersell">TOTAL</td>
-										<td class="highersell">EXECUTED</td>
+										<td class="highersell ">BTC</td>
+										<td class="highersell ">PRICE/BTC</td>
+										<td class="highersell ">TOTAL</td>
+										<td class="highersell ">EXECUTED</td>
 
 									</tr>
 
 									<c:forEach items="${listUSDTransaction}" var="orderTransaction">
 										<tr>
-											<td><c:out
+											<td><fmt:formatNumber pattern="###.####"
 													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
-											<td><c:out value="${orderTransaction.btcRate.rate}" /></td>
-											<td><c:out value="${orderTransaction.total}" /></td>
+													
+													
+											<td><!-- c:out value="${orderTransaction.btcRate.rate}" /--> <fmt:formatNumber  pattern="###.####" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/></td>
+											<td><!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber pattern="####.####" value="${orderTransaction.total}" maxFractionDigits="4"/>
+												<!-- fmt:formatNumber pattern="###.##" value="${orderTransaction.total}" / -->
+											</td>
 											<td><c:out value="${orderTransaction.created}" /></td>
 										</tr>
 									</c:forEach>
@@ -111,7 +118,7 @@
 
 						</div>
 
-						<div class="span3">
+						<div class="span4">
 							<!-- Buy Orders Start -->
 							<br />
 							<h3 class="marketheader">BUY ORDERS</h3>
@@ -130,9 +137,9 @@
 									<c:forEach items="${listUSDBuyOrder}" var="tradeOrder">
 										<tr>
 										<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><c:out value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><c:out value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -143,7 +150,7 @@
 	  							</c:if>
 						</div>
 
-						<div class="span3">
+						<div class="span4">
 							<!-- Buy Orders End -->
 
 							<!-- Sell Orders Start -->
@@ -152,7 +159,7 @@
 							<br />
 							<c:if test="${not empty listUSDSellOrder}">
 
-								<table class="table table-striped bordertable lasttable">
+								<table class="table table-striped bordertable">
 									<tr>
 										<td class="highersell">STATUS</td>
 										<td class="highersell">PRICE</td>
@@ -164,16 +171,16 @@
 									<c:forEach items="${listUSDSellOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><c:out value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><c:out value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
 								</table>
 							</c:if>
 							<c:if test="${empty listUSDSellOrder}">
-								<table class="table table-striped bordertable lasttable">
+								<table class="table table-striped bordertable">
 									<tr>
 										<td>There are no Sell Orders Yet</td>
 									</tr>
@@ -197,7 +204,7 @@
 					<br />
 
 					<div class="row rowmarket">
-						<div class="span6">
+						<div class="span4">
 							<!-- Latest Trades Start-->
 							<br /> <br />
 							<h3 class="marketheader">LATES TRADES</h3>
@@ -215,10 +222,13 @@
 
 									<c:forEach items="${listCADTransaction}" var="orderTransaction">
 										<tr>
-											<td><c:out
+											<td><fmt:formatNumber pattern="###.####"
 													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
-											<td><c:out value="${orderTransaction.btcRate.rate}" /></td>
-											<td><c:out value="${orderTransaction.total}" /></td>
+											<!-- td><c:out value="${orderTransaction.btcRate.rate}" /></td>
+											<td class="reducedtd"><c:out value="${orderTransaction.total}" /></td -->
+											<td><!-- c:out value="${orderTransaction.btcRate.rate}" /--> <!-- fmt:formatNumber  pattern="###.##" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/ --></td>
+											<td><!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber  pattern="###.####" value="${orderTransaction.total}" maxFractionDigits="4"/></td>
+											
 											<td><c:out value="${orderTransaction.created}" /></td>
 										</tr>
 									</c:forEach>
@@ -231,14 +241,14 @@
 								There are no Transactions yet. 
 	  							</c:if>
 						</div>
-						<div class="span3">
+						<div class="span4">
 							<!-- Buy Orders Start -->
 							<br /> <br />
 							<h3 class="marketheader">Buy Orders</h3>
 							<br />
 
 							<c:if test="${not empty listCADBuyOrder}">
-								<table class="table table-striped bordertable">
+								<table class="table table-striped bordertable middletable">
 									<tr>
 										<td class="highersell">STATUS</td>
 										<td class="highersell">PRICE</td>
@@ -250,9 +260,9 @@
 									<c:forEach items="${listCADBuyOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><c:out value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><c:out value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -264,7 +274,7 @@
 							<!-- Buy Orders End -->
 
 						</div>
-						<div class="span3">
+						<div class="span4">
 							<!-- Sell Orders Start -->
 							<br /> <br />
 							<h3 class="marketheader">SELL Orders</h3>
@@ -283,9 +293,9 @@
 									<c:forEach items="${listCADSellOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><c:out value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><c:out value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -308,8 +318,145 @@
 
 					<!-- End CAD -->
 				</div>
+				
 				<!-- End Deposit -->
-
+				
+				<!-- Start Market History -->
+				
+				<div class="market marketHistory">
+					<br /> <br />
+										<h3>
+						Trade History</h3> <br />
+					<table class="table table-striped">
+						<!-- thead>
+							<tr>
+								<th>ORDER TYPE</th>
+								<th>PRICE</th>
+								<th>CURRENCY</th>
+								<th>QUANTITY</th>
+								<th>TOTAL</th>
+								<th>CREATED</th>
+							</tr>
+						</thead>
+						<tbody -->
+						<tr>
+							<td class="highersell">ORDER TYPE</td>
+							<td class="highersell">STATUS</td>
+							<td class="highersell">PRICE</td>
+							<td class="highersell">CURRENCY</td>
+							<td class="highersell">QUANTITY</td>
+							<td class="highersell">TOTAL</td>
+							<td class="highersell">FEE</td>
+							<td class="highersell">EXECUTED</td>
+							<td class="highersell"></td>
+						</tr>
+						<c:if test="${not empty listOrderTransaction}">
+							<c:forEach items="${listOrderTransaction}" var="orderTransaction">
+								<tr>
+									<td><c:out value="${orderTransaction.tradeOrder.orderType}" /></td>
+									<td><c:out value="${orderTransaction.tradeOrder.orderStatus}" /></td>
+									<td><c:out value="${orderTransaction.price}" /></td>
+									<td><c:out value="${orderTransaction.symbol}" /></td>
+									<td><c:out value="${orderTransaction.quantity}" /></td>
+									<td><c:out value="${orderTransaction.total}" /></td>
+									<td><c:out value="${orderTransaction.fee}" /></td>
+									
+									<td><fmt:formatDate value="${orderTransaction.created}" type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+									<td><a href="#">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty listOrderTransaction}">
+						<tr><td>There are no Orders executed yet. </td></tr>
+	  					</c:if>
+						<!-- tr>
+							<td>SELL</td>
+							<td>127.00</td>
+							<td>USD</td>
+							<td>10</td>
+							<td>12340</td>
+							<td>24/04/2013</td>
+						</tr>
+						<tr>
+							<td>SELL</td>
+							<td>127.00</td>
+							<td>KSH</td>
+							<td>10</td>
+							<td>12340</td>
+							<td>24/04/2013</td>
+						</tr -->
+						<!--  --tbody -->
+					</table>
+				</div>
+				<!-- End Market History -->
+				
+				<!-- Start All Open Orders -->
+				<div class="market allOpenOrders">
+					<br /> <br />
+					<h3>All Open Orders</h3>
+					<br />
+					<table class="table table-striped">
+						<!-- thead>
+							<tr>
+								<th>ORDER TYPE</th>
+								<th>PRICE</th>
+								<th>CURRENCY</th>
+								<th>QUANTITY</th>
+								<th>TOTAL</th>
+								<th>CREATED</th>
+							</tr>
+						</thead>
+						<tbody -->
+						<tr>
+							<td class="highersell">ORDER TYPE</td>
+							<td class="highersell">STATUS</td>
+							<td class="highersell">PRICE</td>
+							<td class="highersell">CURRENCY</td>
+							<td class="highersell">ORDER QTY</td>
+							<td class="highersell">UNFULFILLED QTY</td>
+							<td class="highersell">TOTAL</td>
+							<td class="highersell">CREATED</td>
+							<td class="highersell"></td>
+						</tr>
+						<c:if test="${not empty listOrder}">
+							<c:forEach items="${listOrder}" var="tradeOrder">
+								<tr>
+									<td><c:out value="${tradeOrder.orderType}" /></td>
+									<td><c:out value="${tradeOrder.orderStatus}" /></td>
+									<td><c:out value="${tradeOrder.price}" /></td>
+									<td><c:out value="${tradeOrder.symbol}" /></td>
+									<td><c:out value="${tradeOrder.quantity}" /></td>
+									<td><c:out value="${tradeOrder.unfulfilledquantity}"></c:out></td>
+									<td><c:out value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+									
+									<td><fmt:formatDate value="${tradeOrder.created}" type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+									<td><a href="#">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty listOrder}">
+						<tr><td>There are no Open Orders yet. </td></tr>
+	  					</c:if>
+						<!-- tr>
+							<td>SELL</td>
+							<td>127.00</td>
+							<td>USD</td>
+							<td>10</td>
+							<td>12340</td>
+							<td>24/04/2013</td>
+						</tr>
+						<tr>
+							<td>SELL</td>
+							<td>127.00</td>
+							<td>KSH</td>
+							<td>10</td>
+							<td>12340</td>
+							<td>24/04/2013</td>
+						</tr -->
+						<!--  --tbody -->
+					</table>
+				</div>
+				<!-- End All Open Orders -->
 			</div>
 
 			<!--  div class="span2">

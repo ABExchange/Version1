@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.exchangesystem.dao.OrderTransactionDao;
+import org.exchangesystem.model.ExchangeUser;
 import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderTransactionType;
 import org.exchangesystem.model.OrderType;
@@ -72,6 +73,18 @@ public class OrderTransactionDaoImp extends AbstractJpaDao<OrderTransaction>
 				.createQuery(" from OrderTransaction ordertrx WHERE ((ordertrx.tradeOrder = :tradeOrder) AND (ordertrx.symbol = :symbol)) ORDER BY  id DESC ");// .getResultList();
 		q.setParameter("tradeOrder", tradeOrder);
 		q.setParameter("symbol", symbol);
+
+		return q.getResultList();
+	}
+
+
+	@Transactional
+	public List<OrderTransaction> findAll(ExchangeUser exchangeUser) {
+		EntityManager em = super.entityManager;
+		Query q = em
+				.createQuery(" from OrderTransaction ordertrx WHERE ((ordertrx.createdBy = :exchangeUser) OR ((ordertrx.updatedBy = :updateUser))) ORDER BY  id DESC ");// .getResultList();
+		q.setParameter("exchangeUser", exchangeUser);
+		q.setParameter("updateUser", exchangeUser);
 
 		return q.getResultList();
 	}

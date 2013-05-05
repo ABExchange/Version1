@@ -2,6 +2,7 @@ package org.exchangesystem.service;
 
 import java.util.List;
 
+import org.exchangesystem.model.ExchangeUser;
 import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderType;
 import org.exchangesystem.model.Symbol;
@@ -51,5 +52,11 @@ public interface TradeOrderService extends BaseService<TradeOrder> {
 	 * Get all the Orders that are not closed
 	 * **/
 	public List<TradeOrder> findAllUnclosed(OrderStatus orderStatus);
+	
+	/***
+	 * Get all the Orders that are not closed
+	 * **/
+	public List<TradeOrder> findAllUnclosed(OrderStatus orderStatus,
+			ExchangeUser exchangeUser);
 
 }

@@ -384,18 +384,22 @@ th {
 }
 
 .middletable{
-	margin-left: 1px;
+	margin-left: 18px;
 }
 
 .lasttable{
-	margin-left: 60px;
+	/*** margin-left: 60px; ***/
 	
+}
+.reducedtd{
+	width: 10px;
+	 max-width: 12px;
 }
 
 .rowmarket{
-	margin-left: -50px;
+	/*** margin-left: -50px; ***/
 }
 
 .marketheader{
-	margin-left: 42px;
+	/*** margin-left: 42px; ***/
 }
