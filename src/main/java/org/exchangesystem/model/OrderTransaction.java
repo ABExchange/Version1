@@ -103,7 +103,10 @@ public class OrderTransaction extends DomainObject {
 	}
 
 	public Double getFee() {
-		return fee;
+		if (fee != null)
+				return fee;
+		else
+			return 0.0;
 	}
 
 	public void setFee(Double fee) {

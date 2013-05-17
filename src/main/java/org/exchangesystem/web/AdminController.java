@@ -6,6 +6,7 @@ import org.exchangesystem.daoimp.ExchangeSystemSession;
 import org.exchangesystem.model.BTCRate;
 import org.exchangesystem.model.Country;
 import org.exchangesystem.model.Symbol;
+import org.exchangesystem.model.TradeStatus;
 import org.exchangesystem.model.TransferMethod;
 import org.exchangesystem.service.BTCRateService;
 import org.exchangesystem.service.CountryService;
@@ -61,6 +62,33 @@ public class AdminController {
 		model.addAttribute("countryList", countryList);
 		model.addAttribute("btcRateList", btcRateList);
 		//model.addAttribute("listUser", exchangeUserService.findAll());
+		
+		
+		//Market Values Listing
+		List<Symbol> listSymbol = symbolService.findAll();
+		TradeStatus tradeStatus = exchangeSystemSession.getTradeStatus();
+		Symbol defaultSymbol = tradeStatus.getSymbol();//symbolService.findSymbol("USD");
+		//tradeStatus.setSymbol(defaultSymbol);
+		model.addAttribute("listSymbol", listSymbol);
+		
+		model.addAttribute("tradeStatus", tradeStatus);
+		//Default Symbol - USD
+		model.addAttribute("defaultSymbol", defaultSymbol);
+		//Last Price
+		Double lastPrice = symbolService.getLastPrice(defaultSymbol);
+		model.addAttribute("lastPrice", lastPrice);
+		//High
+		Double highPrice = symbolService.getHighPrice(defaultSymbol);
+		model.addAttribute("highPrice", highPrice);
+		//Low
+		Double lowPrice = symbolService.getLowPrice(defaultSymbol);
+		model.addAttribute("lowPrice", lowPrice);
+		//Volume
+		Long volume = symbolService.getVolume(defaultSymbol);
+		model.addAttribute("volume", volume);
+		//AVG
+		Double average = symbolService.getAverage(defaultSymbol);
+		model.addAttribute("average", average);
 
 		
 		return "admin";

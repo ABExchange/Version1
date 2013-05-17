@@ -3,6 +3,7 @@ package org.exchangesystem.service;
 import java.util.List;
 
 import org.exchangesystem.model.ExchangeUser;
+import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderTransactionType;
 import org.exchangesystem.model.OrderType;
@@ -20,5 +21,7 @@ public interface OrderTransactionService extends BaseService<OrderTransaction> {
 	public List<OrderTransaction> findAll(TradeOrder tradeOrder, Symbol symbol, OrderTransactionType transactionType);
 
 	public List<OrderTransaction> findAll(TradeOrder tradeOrder, Symbol symbol);
+	
+	public List<OrderTransaction> findAllClosed(OrderStatus orderStatus);
 
 }

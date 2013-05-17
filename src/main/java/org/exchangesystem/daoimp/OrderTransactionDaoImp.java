@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import org.exchangesystem.dao.OrderTransactionDao;
 import org.exchangesystem.model.ExchangeUser;
+import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderTransactionType;
 import org.exchangesystem.model.OrderType;
@@ -85,6 +86,17 @@ public class OrderTransactionDaoImp extends AbstractJpaDao<OrderTransaction>
 				.createQuery(" from OrderTransaction ordertrx WHERE ((ordertrx.createdBy = :exchangeUser) OR ((ordertrx.updatedBy = :updateUser))) ORDER BY  id DESC ");// .getResultList();
 		q.setParameter("exchangeUser", exchangeUser);
 		q.setParameter("updateUser", exchangeUser);
+
+		return q.getResultList();
+	}
+
+
+	@Transactional
+	public List<OrderTransaction> findAllClosed(OrderStatus orderStatus) {
+		EntityManager em = super.entityManager;
+		Query q = em
+				.createQuery(" from OrderTransaction ordertrx WHERE (ordertrx.tradeOrder.orderStatus = :orderStatus) ORDER BY  ordertrx.id DESC ");// .getResultList();
+		q.setParameter("orderStatus", OrderStatus.CLOSED);
 
 		return q.getResultList();
 	}

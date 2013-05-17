@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
 	<http auto-config="true">
-		<intercept-url pattern="/" access="ROLE_USER" />
+		<!--intercept-url pattern="/" access="ROLE_USER" / -->
 		<intercept-url pattern="/welcome*" access="ROLE_USER" />
 		<intercept-url pattern="/index*" access="ROLE_USER" />
 		<intercept-url pattern="/posts*" access="ROLE_USER" />
@@ -23,7 +23,7 @@
 		<intercept-url pattern="/markets*" access="ROLE_USER" />
 		
 		<!-- intercept-url pattern="/" access="ROLE_USER" / -->
-		<form-login login-page="/user/login" 
+		<form-login login-page="/home" 
 			authentication-failure-url="/user/loginfailed" authentication-success-handler-ref="simpleUrlAuthenticationSuccessHandler"/>
 		<!-- logout logout-success-url="/logout" / -->
 	</http>

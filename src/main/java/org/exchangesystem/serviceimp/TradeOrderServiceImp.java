@@ -1035,7 +1035,7 @@ public class TradeOrderServiceImp implements TradeOrderService {
 			Double transactionFee = (sellOrder.getPrice() * sellOrder.getUnfulfilledquantity() * FEEMULTIPLIER);
 			//Increase the Transaction Order total
 			orderTransaction.setTotal(orderTransaction.getTotal().doubleValue() + transactionTotal);
-			orderTransaction.setFee(orderTransaction.getFee() + transactionFee);
+			orderTransaction.setFee(orderTransaction.getFee() != null ? (orderTransaction.getFee()+transactionFee) : (0 + transactionFee));
 			//Increase the transaction order quantity
 			orderTransaction.setQuantity(orderTransaction.getQuantity().longValue() + sellOrder.getUnfulfilledquantity());
 			

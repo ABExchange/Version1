@@ -9,17 +9,18 @@ ul>li:nth-child(even) {
 ul>li:hover {
 	background-color: #F6F4F0;
 } **/
+
+/**
 .span4>div,.span8>div,.span6>div {
 	background-color: #eee;
 	border: 0.5px solid #888;
 	border-radius: 20px;
-}
+} ****/
 
 /**.span12>div {
 	background-color: #eee;
 	border-radius: 20px;
 } ***/
-
 .projectnormal {
 	float: left
 }
@@ -241,8 +242,8 @@ li {
 	text-shadow: 0 1px 0 #fff;
 }
 
-.box {
-	width: 197px;
+.box { /** width: 197px; ***/
+	width: 30%;
 	padding: 12px !important;
 	margin: 0px 4px;
 	float: left;
@@ -309,8 +310,12 @@ The Second Navigation
 **/
 .nav-tabs>.active>a,.nav-tabs>.active>a:hover,.ui-tabs-nav>.ui-state-active>a,.ui-tabs-nav>.ui-state-active>a:hover
 	{
-	color: rgb(23, 224, 63) !important;
-	background: #fff !important;
+/***	color: rgb(23, 224, 63) !important;
+	background: #fff !important; **/
+	
+	color: #fff !important;
+	background: #000 !important;
+	font-weight: bold;
 	margin-top: 0px !important;
 	padding-bottom: 13px !important;
 }
@@ -330,7 +335,6 @@ The Second Navigation
 /****
 	For the tables
 **/
-
 table {
 	max-width: 100%;
 	background-color: transparent;
@@ -353,17 +357,16 @@ th {
 	width: 30%;
 }
 
-.highersell{
+.highersell {
 	font-weight: bold;
-	width: 30%;
-	font-size: 16px;
+	/** font-size: 16px; **/
 }
 
-.account{
+.account {
 	display: none;
 }
 
-.market{
+.market {
 	display: none;
 }
 
@@ -379,27 +382,222 @@ th {
 	font-weight: bold;
 }
 
-.bordertable{
-	 border: solid black 1px;
+.bordertable {
+	border: solid black 1px;
 }
 
-.middletable{
+.middletable {
 	margin-left: 18px;
 }
 
-.lasttable{
-	/*** margin-left: 60px; ***/
+.lasttable { /*** margin-left: 60px; ***/
 	
 }
-.reducedtd{
+
+.reducedtd {
 	width: 10px;
-	 max-width: 12px;
+	max-width: 12px;
 }
 
-.rowmarket{
-	/*** margin-left: -50px; ***/
+.rowmarket { /*** margin-left: -50px; ***/
+	
 }
 
-.marketheader{
-	/*** margin-left: 42px; ***/
+.marketheader { /*** margin-left: 42px; ***/
+	
+}
+
+.bitcoinprices {
+	top: 0;
+	background-color: #FD0000;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 18px;
+	height: 40px;
+}
+
+.mainlogocontainer {
+	float: left;
+}
+
+.mainlogincontainer {
+	float: right;
+}
+
+.mainlogincontainertextalign {
+	text-align: right;
+}
+
+.mainlogo {
+	background-color: #800000;
+	color: #FFFFFF;
+	height: 125px;
+	margin-top: -30px;
+}
+
+.mainlogin {
+	background-color: #800000;
+	color: #FFFFFF;
+	height: 170px;
+	width: 300px;
+	margin-top: -30px;
+}
+
+.logoletters {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.xlogoletter {
+	font-weight: bold;
+}
+
+.innermainlogo {
+	margin-top: 30px;
+	margin-left: 30px;
+	background-color: #800000;
+}
+
+.innerloginlogo {
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 3px solid #8F0000;
+	/** margin: 1em 0; **/
+	margin-left: 0px;
+	margin-right: 20px;
+	padding: 0;
+}
+
+.exchangeslogan {
+	color: green;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.mainhr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 5px solid #FF0000;
+	/** margin: 1em 0; **/
+	margin-left: 0px;
+	margin-right: 20px;
+	padding: 0;
+}
+
+.loggedinhr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 5px solid #888;
+	/** margin: 1em 0; **/
+	margin-left: 0px;
+	margin-right: 20px;
+	padding: 0;
+}
+
+.mainheaders {clear;
+	background-color: red;
+	color: #000000;
+	font-weight: bold;
+	/** background-color: #eee; **/
+	border: 0.5px solid #888;
+	border-radius: 0px;
+	margin-top: 30px;
+	font-size: 40px;
+	height: 50px;
+}
+
+.imageholder {
+	height: 190px;
+}
+
+.maintabletext {
+	font-size: 18px;
+	background-color: #E5F677;
+}
+
+.mainheadertext {
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+.btnloginmain {
+	border-bottom: 15px solid #000;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	width: 0;
+	height: 0;
+}
+
+.mainloginbutton {
+	color: white;
+	background-color: white;
+}
+
+.tradebutton {
+	display: block;
+	width: 115px;
+	height: 25px;
+	background: red;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5px;
+	color: black;	
+	font-weight: bold;
+}
+
+.accountbuttons {
+	display: block;
+	width: 115px;
+	height: 25px;
+	/**background: #B0B0B0; **/
+	background: rgb(82, 80, 80);
+	text-transform: uppercase;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5px;
+	color: black;
+	font-weight: bold;
+}
+
+table {
+	font-size: 9px;
+}
+
+.imageholderows {
+	height: 40px;
+	font-size: 22px;
+}
+
+.exchangebutton { /**
+	clear;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 40px solid white; **/
+	
+}
+
+a {
+	/** color: #0088cc; **/
+	color: black;
+	text-decoration: none;
+}
+
+a:hover,a:focus { /** color: #005580; **/
+	color: black;
+	text-decoration: underline;
+}
+
+.signupbuttonbuy{
+	background-color: #010101;
+	color: #FFFFFF;
 }

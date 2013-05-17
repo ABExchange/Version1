@@ -96,6 +96,19 @@ $('.signupbuttonsell').click(function(e) {
 		
 	});
 	
+	$('.nav-tabs>span').click(function(e){
+		$('.nav-tabs>span').removeClass('active');
+		/** alert($(this).html()); * */
+		$('.trade').hide();
+		$('.account').hide();
+		$('.market').hide();
+		
+		$('div .'+$(this).attr('class')).show();
+		$(this).addClass('active');
+		e.preventDefault();
+		
+	});
+	
 	//Perform the computations when the quantity input loses focus
 	$('#buyQuantity').blur(function(e){
 		var quantity = $('#buyQuantity').val();

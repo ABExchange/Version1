@@ -7,6 +7,7 @@ import org.exchangesystem.model.Bank;
 import org.exchangesystem.model.Country;
 import org.exchangesystem.model.Deposit;
 import org.exchangesystem.model.Symbol;
+import org.exchangesystem.model.TradeStatus;
 import org.exchangesystem.model.TransferMethod;
 import org.exchangesystem.model.Withdrawal;
 import org.exchangesystem.service.BankService;
@@ -67,7 +68,32 @@ public class AccountController {
 		model.addAttribute("withdrawalList", withdrawalList);
 		model.addAttribute("user", exchangeSystemSession.getUser());
 
-
+		//Market Values Listing
+		List<Symbol> listSymbol = symbolService.findAll();
+		TradeStatus tradeStatus = exchangeSystemSession.getTradeStatus();
+		Symbol defaultSymbol = tradeStatus.getSymbol();//symbolService.findSymbol("USD");
+		//tradeStatus.setSymbol(defaultSymbol);
+		model.addAttribute("listSymbol", listSymbol);
+		
+		model.addAttribute("tradeStatus", tradeStatus);
+		//Default Symbol - USD
+		model.addAttribute("defaultSymbol", defaultSymbol);
+		//Last Price
+		Double lastPrice = symbolService.getLastPrice(defaultSymbol);
+		model.addAttribute("lastPrice", lastPrice);
+		//High
+		Double highPrice = symbolService.getHighPrice(defaultSymbol);
+		model.addAttribute("highPrice", highPrice);
+		//Low
+		Double lowPrice = symbolService.getLowPrice(defaultSymbol);
+		model.addAttribute("lowPrice", lowPrice);
+		//Volume
+		Long volume = symbolService.getVolume(defaultSymbol);
+		model.addAttribute("volume", volume);
+		//AVG
+		Double average = symbolService.getAverage(defaultSymbol);
+		model.addAttribute("average", average);
+		
 		return "account";
 	}
 	

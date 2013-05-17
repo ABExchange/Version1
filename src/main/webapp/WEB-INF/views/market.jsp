@@ -22,67 +22,124 @@
 
 	<div class="container">
 
-		<div class="row">
-			<br />
-			<div class="row">
-				<br />
-				<div class="span9"></div>
-				<div class="span3">
-					<span class="navigation-text"><span>LOGGED IN AS <c:out
-								value="${user}"></c:out>
-					</span><br /> <span><a
-							href="${pageContext.request.contextPath}/user/registration">Sign
-								Up</a></span> | <span> <a
-							href="${pageContext.request.contextPath}/user/login">Sign In</a></span>
-						| <span> <a href="${pageContext.request.contextPath}/admin">Admin</a></span>
-						| <span> <a href="${pageContext.request.contextPath}/main">Home</a></span></span>
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="span10">
-					<br /> <span class="brand">Exchange System</span>
-					<ul class="nav">
-						<li><a href="${pageContext.request.contextPath}/trade">Trade</a></li>
-						<li><a href="${pageContext.request.contextPath}/accounts">Accounts</a></li>
-						<li><a href="${pageContext.request.contextPath}/markets">Markets</a></li>
-						<li><a href="${pageContext.request.contextPath}/FAQ">FAQ</a></li>
-					</ul>
-				</div>
-				<div class="span2">
-					<br /> <span id="price-button">PRICES</span>
-
+		<div class="row bitcoinprices">
+			<div class="span12">
+				<span>LAST PRICE : $${lastPrice}</span> <span>HIGH :
+					$${highPrice}</span> <span>LOW : $${lowPrice}</span> <span>VOLUME :
+					${volume}</span> <span>AVG : $${average}</span>
+				<div style="float: right;">
+					<!--form>
+  				<select class="textfieldcurrency">
+					<option value="USD" label="USD">USD</option>
+					<option value="CAD" label="CAD">CAD</option>
+				</select>
+			</form -->
+					<form:form name='frmTradeStatus'
+						action="${pageContext.request.contextPath}/home/${tradeStatus.symbol.id}"
+						modelAttribute="tradeStatus">
+						<form:select class="textfieldcurrency" path="symbol.id" name="symbols" onchange="this.form.submit();">
+							<form:option value="" label="--Please Select" />
+							<form:options items="${listSymbol}" itemValue="id"
+								itemLabel="code" />
+						</form:select>
+					</form:form>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="span3 mainlogocontainer">
+				<!--div class="mainlogo">
+  			<div class="innermainlogo">
+  			<div style="padding-top: 30px">
+  			<span class="logoletters">
+  				ABE
+  			</span>
+  			<span class="xlogoletter">X</span>
+  			<br/>
+  			<br/>
+  			<span>
+  				www.abexhange.net
+  			</span>
+  			</div>
+  			</div>
+  			</div>
+  			<span class="exchangeslogan">EASY SECURE RELIABLE</span -->
+				<span> <img alt=""
+					src="${pageContext.request.contextPath}/images/mainlogo.png" />
+				</span>
+				<!--span class="exchangeslogan">EASY SECURE RELIABLE</span -->
+				<br /> <br /> <span><img alt=""
+					src="${pageContext.request.contextPath}/images/mainlogowords.png">
+				</span>
+			</div>
+
+			<div class="span6 mainlogincontainer mainlogincontainertextalign">
+				<span>Hi! <c:out value="${user}"></c:out></span> <br /> <span>ACCOUNT
+					NUMBER: XXXXXXXXXX</span> <br /> <span>MY WALLET : XXXXXXX BTC</span>
+				<div>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $XXXXX.xx</span></div><br/>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB: $XXXXX.xx</span> </div><br/>	
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $XXXXX.xx</span></div>
+			</div>	
+			<span>
+			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
+			</span>	
+			</div>
+		</div>
+		<hr class="mainhr" />
+		<div class="row">
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/accounts">ACCOUNT</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/trade">TRADE</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/markets">MARKET</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/FAQ">FAQ</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/admin">ADMIN</a></span>
+			</div>
+		</div>
+		<hr class="loggedinhr" />
 
 
 		<div class="row">
 			<br />
-			<div class="span12">
-				<br />
-				<h1>MARKETS</h1>
-				<br />
-				<!-- Trade form was removed from here -->
-				<ul class="nav nav-tabs">
-					<li class="marketUSD active"><a href="">USD</a></li>
-					<li class="marketCAD"><a href="">CAD</a></li>
-					<li class="marketHistory"><a href="">Market History</a></li>
-					<li class="allOpenOrders"><a href="">All Open Orders</a></li>
-					<!-- li class="accountWithdrawal"><a href="">Withdraw </a></li>
+			<div class="span2">
+				<div class="nav nav-tabs">
+					<span class="marketUSD active"><a class="accountbuttons"
+						href="">USD</a></span> <br /> <span class="marketCAD"><a
+						class="accountbuttons" href="">CAD</a></span> <br /> <span
+						class="marketHistory "><a class="accountbuttons" href="">Market
+							History </a></span> <br />
+					<!--span class="allOpenOrders"><a class="accountbuttons" href="">All Open Orders </a></span> <br/ -->
+				</div>
+
+				<!-- ul class="nav nav-tabs">
+					<li class="accountBalance active"><a href="">Balance</a></li>
+					<li class="accountDeposit"><a href="">Deposit</a></li>
+					<li class="accountWithdrawal"><a href="">Withdraw </a></li>
 					<li class="accountBankAccounts"><a href="">Bank Accounts </a></li>
-					<li class="accountHistory"><a href="">History </a></li -->
-				</ul>
+					<li class="accountHistory"><a href="">History </a></li>
+				</ul -->
+			</div>
+			<div class="span10">
+				<!-- Trade form was removed from here -->
 				<div class="market marketUSD">
-					<br /> <br />
 					<h3>USD/BTC Rates</h3>
-					<br />
 					<div class="row">
-						<div class="span4">
+						<div class="span3">
 							<!-- Latest Trades Start-->
-							<br />
 							<h3 class="marketheader">LATES TRADES</h3>
-							<br />
 							<c:if test="${not empty listUSDTransaction}">
 
 								<table class="table table-striped bordertable">
@@ -98,11 +155,17 @@
 										<tr>
 											<td><fmt:formatNumber pattern="###.####"
 													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
-													
-													
-											<td><!-- c:out value="${orderTransaction.btcRate.rate}" /--> <fmt:formatNumber  pattern="###.####" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/></td>
-											<td><!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber pattern="####.####" value="${orderTransaction.total}" maxFractionDigits="4"/>
-												<!-- fmt:formatNumber pattern="###.##" value="${orderTransaction.total}" / -->
+
+
+											<td>
+												<!-- c:out value="${orderTransaction.btcRate.rate}" /--> <fmt:formatNumber
+													pattern="###.####" value="${orderTransaction.btcRate.rate}"
+													maxFractionDigits="4" />
+											</td>
+											<td>
+												<!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber
+													pattern="####.####" value="${orderTransaction.total}"
+													maxFractionDigits="4" /> <!-- fmt:formatNumber pattern="###.##" value="${orderTransaction.total}" / -->
 											</td>
 											<td><c:out value="${orderTransaction.created}" /></td>
 										</tr>
@@ -118,7 +181,7 @@
 
 						</div>
 
-						<div class="span4">
+						<div class="span3">
 							<!-- Buy Orders Start -->
 							<br />
 							<h3 class="marketheader">BUY ORDERS</h3>
@@ -136,10 +199,12 @@
 
 									<c:forEach items="${listUSDBuyOrder}" var="tradeOrder">
 										<tr>
-										<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
+											<td><c:out value="${tradeOrder.orderStatus}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -150,13 +215,12 @@
 	  							</c:if>
 						</div>
 
-						<div class="span4">
+						<div class="span3">
 							<!-- Buy Orders End -->
 
 							<!-- Sell Orders Start -->
-							<br />
+
 							<h3 class="marketheader">SELL ORDERS</h3>
-							<br />
 							<c:if test="${not empty listUSDSellOrder}">
 
 								<table class="table table-striped bordertable">
@@ -171,9 +235,11 @@
 									<c:forEach items="${listUSDSellOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -198,17 +264,12 @@
 				</div>
 
 				<div class="market marketCAD">
-					<br /> <br />
 					<!-- Start CAD -->
 					<h3>CAD/BTC Rates</h3>
-					<br />
-
 					<div class="row rowmarket">
-						<div class="span4">
+						<div class="span3">
 							<!-- Latest Trades Start-->
-							<br /> <br />
 							<h3 class="marketheader">LATES TRADES</h3>
-							<br />
 							<c:if test="${not empty listCADTransaction}">
 
 								<table class="table table-striped bordertable">
@@ -226,14 +287,18 @@
 													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
 											<!-- td><c:out value="${orderTransaction.btcRate.rate}" /></td>
 											<td class="reducedtd"><c:out value="${orderTransaction.total}" /></td -->
-											<td><!-- c:out value="${orderTransaction.btcRate.rate}" /--> <!-- fmt:formatNumber  pattern="###.##" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/ --></td>
-											<td><!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber  pattern="###.####" value="${orderTransaction.total}" maxFractionDigits="4"/></td>
-											
+											<td>
+												<!-- c:out value="${orderTransaction.btcRate.rate}" /--> <!-- fmt:formatNumber  pattern="###.##" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/ -->
+											</td>
+											<td>
+												<!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber
+													pattern="###.####" value="${orderTransaction.total}"
+													maxFractionDigits="4" />
+											</td>
+
 											<td><c:out value="${orderTransaction.created}" /></td>
 										</tr>
 									</c:forEach>
-
-
 								</table>
 								<!-- Latest Trades End-->
 							</c:if>
@@ -241,12 +306,9 @@
 								There are no Transactions yet. 
 	  							</c:if>
 						</div>
-						<div class="span4">
+						<div class="span3">
 							<!-- Buy Orders Start -->
-							<br /> <br />
 							<h3 class="marketheader">Buy Orders</h3>
-							<br />
-
 							<c:if test="${not empty listCADBuyOrder}">
 								<table class="table table-striped bordertable middletable">
 									<tr>
@@ -260,9 +322,11 @@
 									<c:forEach items="${listCADBuyOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -274,11 +338,9 @@
 							<!-- Buy Orders End -->
 
 						</div>
-						<div class="span4">
+						<div class="span3">
 							<!-- Sell Orders Start -->
-							<br /> <br />
 							<h3 class="marketheader">SELL Orders</h3>
-							<br />
 							<c:if test="${not empty listCADSellOrder}">
 
 								<table class="table table-striped bordertable lasttable">
@@ -293,9 +355,11 @@
 									<c:forEach items="${listCADSellOrder}" var="tradeOrder">
 										<tr>
 											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${tradeOrder.price}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${tradeOrder.price}" /></td>
 											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####" value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
+											<td><fmt:formatNumber pattern="###.####"
+													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
 										</tr>
 									</c:forEach>
 
@@ -318,15 +382,13 @@
 
 					<!-- End CAD -->
 				</div>
-				
+
 				<!-- End Deposit -->
-				
+
 				<!-- Start Market History -->
-				
+
 				<div class="market marketHistory">
-					<br /> <br />
-										<h3>
-						Trade History</h3> <br />
+					<h3>Trade History</h3>
 					<table class="table table-striped">
 						<!-- thead>
 							<tr>
@@ -341,7 +403,7 @@
 						<tbody -->
 						<tr>
 							<td class="highersell">ORDER TYPE</td>
-							<td class="highersell">STATUS</td>
+							<!-- td class="highersell">STATUS</td -->
 							<td class="highersell">PRICE</td>
 							<td class="highersell">CURRENCY</td>
 							<td class="highersell">QUANTITY</td>
@@ -353,22 +415,26 @@
 						<c:if test="${not empty listOrderTransaction}">
 							<c:forEach items="${listOrderTransaction}" var="orderTransaction">
 								<tr>
-									<td><c:out value="${orderTransaction.tradeOrder.orderType}" /></td>
-									<td><c:out value="${orderTransaction.tradeOrder.orderStatus}" /></td>
+									<td><c:out
+											value="${orderTransaction.tradeOrder.orderType}" /></td>
+									<!-- td><c:out value="${orderTransaction.tradeOrder.orderStatus}" /></td -->
 									<td><c:out value="${orderTransaction.price}" /></td>
 									<td><c:out value="${orderTransaction.symbol}" /></td>
 									<td><c:out value="${orderTransaction.quantity}" /></td>
 									<td><c:out value="${orderTransaction.total}" /></td>
 									<td><c:out value="${orderTransaction.fee}" /></td>
-									
-									<td><fmt:formatDate value="${orderTransaction.created}" type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+
+									<td><fmt:formatDate value="${orderTransaction.created}"
+											type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
 									<td><a href="#">Delete</a></td>
 								</tr>
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty listOrderTransaction}">
-						<tr><td>There are no Orders executed yet. </td></tr>
-	  					</c:if>
+							<tr>
+								<td>There are no Orders executed yet.</td>
+							</tr>
+						</c:if>
 						<!-- tr>
 							<td>SELL</td>
 							<td>127.00</td>
@@ -389,24 +455,14 @@
 					</table>
 				</div>
 				<!-- End Market History -->
-				
+
 				<!-- Start All Open Orders -->
-				<div class="market allOpenOrders">
+				<!--div class="market allOpenOrders">
 					<br /> <br />
 					<h3>All Open Orders</h3>
 					<br />
 					<table class="table table-striped">
-						<!-- thead>
-							<tr>
-								<th>ORDER TYPE</th>
-								<th>PRICE</th>
-								<th>CURRENCY</th>
-								<th>QUANTITY</th>
-								<th>TOTAL</th>
-								<th>CREATED</th>
-							</tr>
-						</thead>
-						<tbody -->
+
 						<tr>
 							<td class="highersell">ORDER TYPE</td>
 							<td class="highersell">STATUS</td>
@@ -437,25 +493,9 @@
 						<c:if test="${empty listOrder}">
 						<tr><td>There are no Open Orders yet. </td></tr>
 	  					</c:if>
-						<!-- tr>
-							<td>SELL</td>
-							<td>127.00</td>
-							<td>USD</td>
-							<td>10</td>
-							<td>12340</td>
-							<td>24/04/2013</td>
-						</tr>
-						<tr>
-							<td>SELL</td>
-							<td>127.00</td>
-							<td>KSH</td>
-							<td>10</td>
-							<td>12340</td>
-							<td>24/04/2013</td>
-						</tr -->
-						<!--  --tbody -->
+
 					</table>
-				</div>
+				</div -->
 				<!-- End All Open Orders -->
 			</div>
 
@@ -466,52 +506,6 @@
 
 			</div -->
 
-		</div>
-
-		<div class="row">
-			<div class="span3 box">
-				<img src="${pageContext.request.contextPath}/images/home_secure.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<h3>SECURE</h3>
-				<p>We've implemented strict security and enterprise
-					infrastructure to keep your Bitcoins safe.</p>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img src="${pageContext.request.contextPath}/images/home_simple.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>Just fund and enter your price. We'll automatically execute
-					your trade at the best available price.</p>
-				<h3>SIMPLE</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img
-					src="${pageContext.request.contextPath}/images/home_affordable.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>We have a low 0.5% fee on all BTC trades regardless of
-					volume, price, or currency. Reduce your spreads.</p>
-				<h3>AFFORDABLE</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img
-					src="${pageContext.request.contextPath}/images/home_available.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>The freedom to make trades and use the platform all-day,
-					everyday. No restrictions..</p>
-				<h3>AVAILABLE 24/7</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="span12">
-				<a>ABOUT US</a>&nbsp;&nbsp; | &nbsp;&nbsp; <a>FUNDING OPTION</a>&nbsp;&nbsp;
-				| &nbsp;&nbsp; <a>TERMS OF USE</a>&nbsp;&nbsp; | &nbsp;&nbsp; <a>ROAD
-					MAP</a> &nbsp;&nbsp; | &nbsp;&nbsp; <a>NEWS</a> &nbsp;&nbsp; |
-				&nbsp;&nbsp; <a>CONTACT US</a>
-			</div>
 		</div>
 
 	</div>

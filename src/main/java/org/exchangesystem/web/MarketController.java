@@ -8,6 +8,7 @@ import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderType;
 import org.exchangesystem.model.Symbol;
 import org.exchangesystem.model.TradeOrder;
+import org.exchangesystem.model.TradeStatus;
 import org.exchangesystem.service.OrderTransactionService;
 import org.exchangesystem.service.SymbolService;
 import org.exchangesystem.service.TradeOrderService;
@@ -74,7 +75,9 @@ public class MarketController {
 		//Get CAD Open Sell Order
 		List<TradeOrder> listCADSellOrder = tradeOrderService.findOpenPartialSellOrdersNewestFirst(cadSymbol, OrderType.SELL, OrderStatus.OPEN, OrderStatus.PARTIAL);
 	
-		List<OrderTransaction> listOrderTransaction = orderTransactionService.findAll();
+		List<OrderTransaction> listOrderTransaction = orderTransactionService.findAllClosed(OrderStatus.CLOSED);
+				
+				//orderTransactionService.findAll();
 		model.addAttribute("listOrderTransaction", listOrderTransaction);
 
 		
@@ -89,8 +92,34 @@ public class MarketController {
 		model.addAttribute("listCADBuyOrder", listCADBuyOrder);
 		model.addAttribute("listCADSellOrder", listCADSellOrder);
 		
-		List<TradeOrder> listOrder = tradeOrderService.findAll(OrderStatus.OPEN);
-		model.addAttribute("listOrder", listOrder);
+		//List<TradeOrder> listOrder = tradeOrderService.findAll(OrderStatus.OPEN);
+		//model.addAttribute("listOrder", listOrder);
+		
+		//Market Values Listing
+		List<Symbol> listSymbol = symbolService.findAll();
+		TradeStatus tradeStatus = exchangeSystemSession.getTradeStatus();
+		Symbol defaultSymbol = tradeStatus.getSymbol();//symbolService.findSymbol("USD");
+		//tradeStatus.setSymbol(defaultSymbol);
+		model.addAttribute("listSymbol", listSymbol);
+		
+		model.addAttribute("tradeStatus", tradeStatus);
+		//Default Symbol - USD
+		model.addAttribute("defaultSymbol", defaultSymbol);
+		//Last Price
+		Double lastPrice = symbolService.getLastPrice(defaultSymbol);
+		model.addAttribute("lastPrice", lastPrice);
+		//High
+		Double highPrice = symbolService.getHighPrice(defaultSymbol);
+		model.addAttribute("highPrice", highPrice);
+		//Low
+		Double lowPrice = symbolService.getLowPrice(defaultSymbol);
+		model.addAttribute("lowPrice", lowPrice);
+		//Volume
+		Long volume = symbolService.getVolume(defaultSymbol);
+		model.addAttribute("volume", volume);
+		//AVG
+		Double average = symbolService.getAverage(defaultSymbol);
+		model.addAttribute("average", average);
 		
 		
 		return "market";

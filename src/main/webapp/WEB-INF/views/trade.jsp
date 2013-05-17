@@ -21,54 +21,111 @@
 
 	<div class="container">
 
-		<div class="row">
-			<br />
-			<div class="row">
-				<br />
-				<div class="span9"></div>
-				<div class="span3">
-					<span class="navigation-text"><span>LOGGED IN AS <c:out
-								value="${user}"></c:out>
-					</span><br /> <span><a
-							href="${pageContext.request.contextPath}/user/registration">Sign
-								Up</a></span> | <span> <a
-							href="${pageContext.request.contextPath}/user/login">Sign In</a></span>
-						| <span> <a href="${pageContext.request.contextPath}/admin">Admin</a></span>
-						| <span> <a href="${pageContext.request.contextPath}/main">Home</a></span></span>
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="span10">
-					<br /> <span class="brand">Exchange System</span>
-					<ul class="nav">
-						<li><a href="${pageContext.request.contextPath}/trade">Trade</a></li>
-						<li><a href="${pageContext.request.contextPath}/accounts">Accounts</a></li>
-						<li><a href="${pageContext.request.contextPath}/markets">Markets</a></li>
-						<li><a href="${pageContext.request.contextPath}/FAQ">FAQ</a></li>
-					</ul>
-				</div>
-				<div class="span2">
-					<br /> <span id="price-button">PRICES</span>
-
+		<div class="row bitcoinprices">
+  		<div class="span12">
+				<span>LAST PRICE : $${lastPrice}</span> <span>HIGH :
+					$${highPrice}</span> <span>LOW : $${lowPrice}</span> <span>VOLUME :
+					${volume}</span> <span>AVG : $${average}</span>
+				<div style="float: right;">
+					<!--form>
+  				<select class="textfieldcurrency">
+					<option value="USD" label="USD">USD</option>
+					<option value="CAD" label="CAD">CAD</option>
+				</select>
+			</form -->
+					<form:form name='frmTradeStatus'
+						action="${pageContext.request.contextPath}/home/${tradeStatus.symbol.id}"
+						modelAttribute="tradeStatus">
+						<form:select class="textfieldcurrency" path="symbol.id" name="symbols" onchange="this.form.submit();">
+							<form:option value="" label="--Please Select" />
+							<form:options items="${listSymbol}" itemValue="id"
+								itemLabel="code" />
+						</form:select>
+					</form:form>
 				</div>
 			</div>
-		</div>
+  	</div>
+  	<div class="row">
+  		<div class="span3 mainlogocontainer">
+  			<!--div class="mainlogo">
+  			<div class="innermainlogo">
+  			<div style="padding-top: 30px">
+  			<span class="logoletters">
+  				ABE
+  			</span>
+  			<span class="xlogoletter">X</span>
+  			<br/>
+  			<br/>
+  			<span>
+  				www.abexhange.net
+  			</span>
+  			</div>
+  			</div>
+  			</div>
+  			<span class="exchangeslogan">EASY SECURE RELIABLE</span -->
+  			<span>
+  				<img alt="" src="${pageContext.request.contextPath}/images/mainlogo.png"/>
+  			</span>
+  			<!--span class="exchangeslogan">EASY SECURE RELIABLE</span -->
+  			<br/>
+  			<br/>
+  			<span><img alt="" src="${pageContext.request.contextPath}/images/mainlogowords.png">   </span>
+  		</div> 
+  		
+  		<div class="span6 mainlogincontainer mainlogincontainertextalign">
+			<span>Hi! <c:out value="${user}"></c:out></span>
+			<br/>
+			<span>ACCOUNT NUMBER: XXXXXXXXXX</span>
+			<br/>
+			<span>MY WALLET : XXXXXXX BTC</span>
+			<div>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $XXXXX.xx</span></div><br/>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB: $XXXXX.xx</span> </div><br/>	
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $XXXXX.xx</span></div>
+			</div>	
+			<span>
+			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
+			</span>	
+  		</div>
+  	</div>
+  	<hr class="mainhr"/>
+  	<div class="row">
+  		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/accounts">ACCOUNT</a></span></div>
+ 		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/trade">TRADE</a></span></div>
+ 		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/markets">MARKET</a></span></div>
+ 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/FAQ">FAQ</a></span></div>
+ 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/admin">ADMIN</a></span></div> 
+  	</div>
+  	<hr class="loggedinhr"/>
 
 
 		<div class="row">
 			<br />
-			<div class="span12">
-				<br />
-				<h1>TRADE</h1>
-				<br />
+			<div class="span2">
+				<div class="nav nav-tabs">
+					<span class="buybitcoins active"><a class="accountbuttons" href="">Buy Bitcoins</a></span> <br/>
+					<span class="sellbitcoins"><a  class="accountbuttons" href="">Sell Bitcoins</a></span> <br/>
+					<span class="openorders"><a  class="accountbuttons" href="">Open Orders </a></span> <br/>
+					<span class="tradehistory"><a class="accountbuttons" href="">Trade History </a></span> <br/>
+				</div>
+			
+				<!-- ul class="nav nav-tabs">
+					<li class="accountBalance active"><a href="">Balance</a></li>
+					<li class="accountDeposit"><a href="">Deposit</a></li>
+					<li class="accountWithdrawal"><a href="">Withdraw </a></li>
+					<li class="accountBankAccounts"><a href="">Bank Accounts </a></li>
+					<li class="accountHistory"><a href="">History </a></li>
+				</ul -->
+			</div>
+			<div class="span10">
+				<!-- h1>TRADE</h1-->
 				<!-- Trade form was removed from here -->
-				<ul class="nav nav-tabs">
+				<!-- ul class="nav nav-tabs">
 					<li class="buybitcoins active"><a href="">Buy Bitcoins</a></li>
 					<li class="sellbitcoins"><a href="">Sell Bitcoins</a></li>
 					<li class="openorders"><a href="">Open Orders </a></li>
 					<li class="tradehistory"><a href="">Trade History </a></li>
-				</ul>
+				</ul -->
 				<div class="trade buybitcoins">
 					<form:form name='frmBuyBitcoin'
 						action="${pageContext.request.contextPath}/trade/buybitcoin"
@@ -106,6 +163,8 @@
 											<td>$0.00</td>
 										</tr>
 									</table></td>
+									<td></td>
+									<td></td>
 							</tr>
 							<tr>
 								<td><span>Order Quantity*</span> <br /> <br /> <form:input
@@ -113,14 +172,18 @@
 										class="textfieldbuy" value='${tradeOrder.quantity}'
 										path="quantity" /> <br />
 									<p class="registerwarning">Quantity must be specified</p></td>
+								<td></td>
 								<td><span>Price*</span> <br /> <br /> <form:input
 										type='text' name='price' id="buyPrice" class="textfieldbuy"
 										value='127.9900' path="price" /> <br />
 									<p class="registerwarning">There must be a price!</p></td>
+									<td></td>
+									
 								<td><span>Fee</span> <br /> <br /> <form:input
 										type='text' name='fee' id="buyFee" class="textfieldbuy"
 										value='${tradeOrder.fee}' path="fee" /> <br />
 									<p class="registerwarning">There must be a fee!</p></td>
+									<td></td>
 								<td><span>Total</span> <br /> <br /> <form:input
 										type='text' name='total' id="buyTotal" class="textfieldbuy"
 										value='${tradeOrder.total}' path="total" /> <br />
@@ -128,8 +191,11 @@
 							</tr>
 
 							<tr>
-								<td><button class="btn btn-success signupbuttonbuy"
-										type="submit">Place Order</button></td>
+							<!-- btn btn-success  -->
+								<td></td>
+								<td></td>
+								<td><button class="signupbuttonbuy"
+										type="submit">SUBMIT</button></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -215,9 +281,7 @@
 				<!-- Start Open Orders -->
 
 				<div class="trade openorders">
-					<br /> <br />
 					<h3>Open Orders</h3>
-					<br />
 					<table class="table table-striped">
 						<!-- thead>
 							<tr>
@@ -282,9 +346,8 @@
 				<!-- End Open Orders -->
 				<!-- Trade History -->
 				<div class="trade tradehistory">
-					<br /> <br />
 					<h3>
-						Trade History</h3> <br />
+						Trade History</h3>
 											<table class="table table-striped">
 						<!-- thead>
 							<tr>
@@ -356,52 +419,6 @@
 
 			</div -->
 
-		</div>
-
-		<div class="row">
-			<div class="span3 box">
-				<img src="${pageContext.request.contextPath}/images/home_secure.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<h3>SECURE</h3>
-				<p>We've implemented strict security and enterprise
-					infrastructure to keep your Bitcoins safe.</p>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img src="${pageContext.request.contextPath}/images/home_simple.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>Just fund and enter your price. We'll automatically execute
-					your trade at the best available price.</p>
-				<h3>SIMPLE</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img
-					src="${pageContext.request.contextPath}/images/home_affordable.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>We have a low 0.5% fee on all BTC trades regardless of
-					volume, price, or currency. Reduce your spreads.</p>
-				<h3>AFFORDABLE</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-			<div class="span3 box">
-				<img
-					src="${pageContext.request.contextPath}/images/home_available.jpg"
-					alt="Secure Bitcoin Exchange" />
-				<p>The freedom to make trades and use the platform all-day,
-					everyday. No restrictions..</p>
-				<h3>AVAILABLE 24/7</h3>
-				<a href="">LEARN MORE</a>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="span12">
-				<a>ABOUT US</a>&nbsp;&nbsp; | &nbsp;&nbsp; <a>FUNDING OPTION</a>&nbsp;&nbsp;
-				| &nbsp;&nbsp; <a>TERMS OF USE</a>&nbsp;&nbsp; | &nbsp;&nbsp; <a>ROAD
-					MAP</a> &nbsp;&nbsp; | &nbsp;&nbsp; <a>NEWS</a> &nbsp;&nbsp; |
-				&nbsp;&nbsp; <a>CONTACT US</a>
-			</div>
 		</div>
 
 	</div>

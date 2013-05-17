@@ -45,7 +45,49 @@ public class TestSymbol {
 		symbol.setPrice(127.990);
 		symbolService.add(symbol);
 
-		Assert.assertTrue(symbolService.count().equals(new Long(3)));
+		Assert.assertTrue(symbolService.count().compareTo(new Long(3)) == 1);
+	}
+	
+	@Test
+	@Transactional
+	public void testLastPrice(){
+		Symbol symbol  = symbolService.findSymbol("USD");
+		Assert.assertTrue(symbolService.getLastPrice(symbol) == 0.0);
+		
+	}
+	@Test
+	@Transactional
+	public void testHighPrice()
+	{
+		Symbol symbol  = symbolService.findSymbol("USD");
+		Assert.assertTrue(symbolService.getHighPrice(symbol) == 0.0);
+		
+	}
+	
+	@Test
+	@Transactional
+	public void testLowPrice(){
+		Symbol symbol  = symbolService.findSymbol("USD");
+		Assert.assertTrue(symbolService.getLowPrice(symbol) == 0.0);
+	
+	}
+	
+	@Test
+	@Transactional
+	public void testVolume(){
+		Symbol symbol  = symbolService.findSymbol("USD");
+		Assert.assertTrue(symbolService.getVolume(symbol) == 0);
+
+	}
+	
+	@Test
+	@Transactional
+	public void testAverage(){
+		Symbol symbol  = symbolService.findSymbol("USD");
+		System.out.println(symbolService.getAverage(symbol));
+		
+		Assert.assertTrue(symbolService.getAverage(symbol) == 0.0);
+		
 	}
 
 }

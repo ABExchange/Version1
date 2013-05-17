@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.exchangesystem.dao.OrderTransactionDao;
 import org.exchangesystem.model.ExchangeUser;
+import org.exchangesystem.model.OrderStatus;
 import org.exchangesystem.model.OrderTransaction;
 import org.exchangesystem.model.OrderTransactionType;
 import org.exchangesystem.model.OrderType;
@@ -62,6 +63,10 @@ public class OrderTransactionServiceImp implements OrderTransactionService {
 
 	public List<OrderTransaction> findAll(ExchangeUser exchangeUser) {
 		return orderTransactionDao.findAll(exchangeUser);
+	}
+
+	public List<OrderTransaction> findAllClosed(OrderStatus orderStatus) {
+		return orderTransactionDao.findAllClosed(OrderStatus.CLOSED);
 	}
 
 }
