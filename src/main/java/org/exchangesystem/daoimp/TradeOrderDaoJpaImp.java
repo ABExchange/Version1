@@ -220,4 +220,35 @@ public class TradeOrderDaoJpaImp extends AbstractJpaDao<TradeOrder> implements
 		return q.getResultList();
 	}
 
+	@Transactional
+	public List<TradeOrder> findAll(Symbol symbol, ExchangeUser exchangeUser) {
+		EntityManager em = super.entityManager;
+		Query q = em
+				.createQuery(" from TradeOrder torder WHERE ((torder.symbol = :symbol) AND (torder.createdBy = :exchangeUser)) ORDER BY  id ");// .getResultList();
+		q.setParameter("symbol", symbol);
+		q.setParameter("exchangeUser", exchangeUser);
+
+		return q.getResultList();
+	}
+
+	@Transactional
+	public List<TradeOrder> findAll(Symbol symbol) {
+		EntityManager em = super.entityManager;
+		Query q = em
+				.createQuery(" from TradeOrder torder WHERE ((torder.symbol = :symbol)) ORDER BY  id ");// .getResultList();
+		q.setParameter("symbol", symbol);
+
+		return q.getResultList();
+	}
+
+	@Transactional
+	public List<TradeOrder> findAll(ExchangeUser exchangeUser) {
+		EntityManager em = super.entityManager;
+		Query q = em
+				.createQuery(" from TradeOrder torder WHERE ((torder.createdBy = :exchangeUser)) ORDER BY  id ");// .getResultList();
+		q.setParameter("exchangeUser", exchangeUser);
+
+		return q.getResultList();
+	}
+
 }

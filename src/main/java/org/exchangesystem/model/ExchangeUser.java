@@ -28,6 +28,9 @@ public class ExchangeUser extends DomainObject {
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Transient
+	private String names;
+	
 //	@NotNull
 //	@Size(min=6, max=50)
 	private String email;
@@ -54,6 +57,27 @@ public class ExchangeUser extends DomainObject {
 	
 	@Transient
 	private String sessionId;
+	
+	private Long accountSequence;
+	private String accountNumber;
+	
+	
+
+	public Long getAccountSequence() {
+		return accountSequence;
+	}
+
+	public void setAccountSequence(Long accountSequence) {
+		this.accountSequence = accountSequence;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -141,6 +165,16 @@ public class ExchangeUser extends DomainObject {
 
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+	
+	
+
+	public String getNames() {
+		return firstName+" "+lastName;
+	}
+
+	public void setNames(String names) {
+		this.names = firstName+" "+lastName;
 	}
 
 	@Override

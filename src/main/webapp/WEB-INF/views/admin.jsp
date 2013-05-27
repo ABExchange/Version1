@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mytags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -21,7 +22,7 @@
 	<div class="container">
 
 		<div class="row bitcoinprices">
-  		<div class="span12">
+			<div class="span12">
 				<span>LAST PRICE : $${lastPrice}</span> <span>HIGH :
 					$${highPrice}</span> <span>LOW : $${lowPrice}</span> <span>VOLUME :
 					${volume}</span> <span>AVG : $${average}</span>
@@ -35,7 +36,8 @@
 					<form:form name='frmTradeStatus'
 						action="${pageContext.request.contextPath}/home/${tradeStatus.symbol.id}"
 						modelAttribute="tradeStatus">
-						<form:select class="textfieldcurrency" path="symbol.id" name="symbols" onchange="this.form.submit();">
+						<form:select class="textfieldcurrency" path="symbol.id"
+							name="symbols" onchange="this.form.submit();">
 							<form:option value="" label="--Please Select" />
 							<form:options items="${listSymbol}" itemValue="id"
 								itemLabel="code" />
@@ -43,10 +45,10 @@
 					</form:form>
 				</div>
 			</div>
-  	</div>
-  	<div class="row">
-  		<div class="span3 mainlogocontainer">
-  			<!-- div class="mainlogo">
+		</div>
+		<div class="row">
+			<div class="span3 mainlogocontainer">
+				<!-- div class="mainlogo">
   			<div class="innermainlogo">
   			<div style="padding-top: 30px">
   			<span class="logoletters">
@@ -62,40 +64,84 @@
   			</div>
   			</div>
   			<span class="exchangeslogan">EASY SECURE RELIABLE</span -->
-  			<span>
-  				<img alt="" src="${pageContext.request.contextPath}/images/mainlogo.png"/>
-  			</span>
-  			<!--span class="exchangeslogan">EASY SECURE RELIABLE</span -->
-  			<br/>
-  			<br/>
-  			<span><img alt="" src="${pageContext.request.contextPath}/images/mainlogowords.png">   </span>
-  		</div> 
-  		
-  		<div class="span6 mainlogincontainer mainlogincontainertextalign">
-			<span>Hi! <c:out value="${user}"></c:out></span>
-			<br/>
-			<span>ACCOUNT NUMBER: XXXXXXXXXX</span>
-			<br/>
-			<span>MY WALLET : XXXXXXX BTC</span>
-			<div>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $XXXXX.xx</span></div><br/>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB: $XXXXX.xx</span> </div><br/>	
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $XXXXX.xx</span></div>
-			</div>	
-			<span>
+				<span> <img alt=""
+					src="${pageContext.request.contextPath}/images/mainlogo.png" />
+				</span>
+				<!--span class="exchangeslogan">EASY SECURE RELIABLE</span -->
+				<br /> <br /> <span><img alt=""
+					src="${pageContext.request.contextPath}/images/mainlogowords.png">
+				</span>
+			</div>
+
+			<div class="span6 mainlogincontainer mainlogincontainertextalign">
+				<span>Hi! <c:out value="${user}"></c:out></span> <br /> <span>ACCOUNT
+					NUMBER: <c:out value="${accountNo}"></c:out>
+				</span> <br /> <span>MY WALLET : <fmt:formatNumber pattern="####.##"
+						value="${btcBalance}" maxFractionDigits="2" /> BTC
+				</span>
+				<div>
+					<div>
+						<span><img alt=""
+							src="${pageContext.request.contextPath}/images/flagh.png">
+						</span> <span style="float: right;">HKD: $<fmt:formatNumber
+								pattern="####.##" value="${hkdBalance}" maxFractionDigits="2" /></span>
+					</div>
+					<br />
+					<div>
+						<span><img alt=""
+							src="${pageContext.request.contextPath}/images/flagc.png">
+						</span> <span style="float: right;">RMB: ¥<fmt:formatNumber
+								pattern="####.##" value="${rmbBalance}" maxFractionDigits="2" /></span>
+					</div>
+					<br />
+					<div>
+						<span><img alt=""
+							src="${pageContext.request.contextPath}/images/flagu.png">
+						</span> <span style="float: right;">USD: $<fmt:formatNumber
+								pattern="####.##" value="${usdBalance}" maxFractionDigits="2" /></span>
+					</div>
+				</div>
+
+					<span>
+			<a href="/user/logout">
 			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
+			</a>
 			</span>	
-  		</div>
-  	</div>
-  	<hr class="mainhr"/>
-  	<div class="row">
-  		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/accounts">ACCOUNT</a></span></div>
- 		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/trade">TRADE</a></span></div>
- 		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/markets">MARKET</a></span></div>
- 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/FAQ">FAQ</a></span></div>
- 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/admin">ADMIN</a></span></div> 
-  	</div>
-  	<hr class="loggedinhr"/>
+			
+			</div>
+		</div>
+		<hr class="mainhr" />
+		<div class="row">
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/accounts">ACCOUNT</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/trade">TRADE</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"><a
+					href="${pageContext.request.contextPath}/markets">MARKET</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/FAQ">FAQ</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/admin">ADMIN</a></span>
+			</div>
+			<!--div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/systemorderstransactions">Transactions</a></span>
+			</div -->
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/systemorders">All Orders History</a></span>
+			</div>
+		</div>
+		<hr class="loggedinhr" />
 
 
 		<div class="row">
@@ -394,6 +440,11 @@
 				There are no Methods yet. 
 	  </c:if>
 				<!-- End Transfer Method -->
+
+				<div>
+					<span><a href="/generateaccountnumbers">Generate Account
+							Numbers</a></span>
+				</div>
 			</div>
 
 

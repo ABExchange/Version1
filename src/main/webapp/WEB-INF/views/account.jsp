@@ -73,16 +73,19 @@
 			</div>
 
 			<div class="span6 mainlogincontainer mainlogincontainertextalign">
-				<span>Hi! <c:out value="${user}"></c:out></span> <br /> <span>ACCOUNT
-					NUMBER: XXXXXXXXXX</span> <br /> <span>MY WALLET : XXXXXXX BTC</span>
+				<span>Hi! <c:out value="${user}"></c:out></span> <br /> <span>ACCOUNT NUMBER: <c:out value="${accountNo}"></c:out></span>
+				 <br /> <span>MY WALLET : <fmt:formatNumber pattern="####.##" value="${btcBalance}" maxFractionDigits="2" /> BTC</span>
 				<div>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $XXXXX.xx</span></div><br/>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB: $XXXXX.xx</span> </div><br/>	
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $XXXXX.xx</span></div>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $<fmt:formatNumber pattern="####.##" value="${hkdBalance}" maxFractionDigits="2" /></span></div><br/>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB:  ¥<fmt:formatNumber pattern="####.##" value="${rmbBalance}" maxFractionDigits="2" /></span> </div><br/>	
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $<fmt:formatNumber pattern="####.##" value="${usdBalance}" maxFractionDigits="2" /></span></div>
 			</div>	
-			<span>
+				<span>
+			<a href="/user/logout">
 			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
+			</a>
 			</span>	
+			
 			</div>
 		</div>
 		<hr class="mainhr" />
@@ -106,6 +109,10 @@
 			<div class="span2">
 				<span class="tradebutton"> <a
 					href="${pageContext.request.contextPath}/admin">ADMIN</a></span>
+			</div>
+			<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/systemorders">All Orders History</a></span>
 			</div>
 		</div>
 		<hr class="loggedinhr" />
@@ -158,8 +165,20 @@
 							<td class="highersell">CREATED</td>
 
 						</tr>
+						
+						<c:if test="${not empty listSymbolBalances}">
+							
+								<c:forEach items="${listSymbolBalances}" var="symbolBalance">
+									<tr>
+										<td><c:out value="${symbolBalance.symbol}" /></td>
+										<td><fmt:formatNumber pattern="####.##" value="${symbolBalance.totalBalance}" maxFractionDigits="2" /></td>
+										<td><fmt:formatNumber pattern="####.##" value="${symbolBalance.totalBalance}" maxFractionDigits="2" /></td>
+										<td><fmt:formatDate value="${symbolBalance.symbol.created}" type="both" pattern="dd MMMM yyyy" /></td>
+									</tr>
+								</c:forEach>
+						</c:if>
 
-						<tr>
+						<!--tr>
 							<td>BTC</td>
 							<td>0.000</td>
 							<td>0.000</td>
@@ -177,7 +196,7 @@
 							<td>0.000</td>
 							<td>0.000</td>
 							<td>April, 24 2013</td>
-						</tr>
+						</tr -->
 
 						<!-- tr>
 							<td>SELL</td>

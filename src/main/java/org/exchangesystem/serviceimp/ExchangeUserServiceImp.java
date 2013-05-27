@@ -54,4 +54,14 @@ public class ExchangeUserServiceImp implements ExchangeUserService {
 		return userDao.findUser(email);
 	}
 
+	@Transactional
+	public Long getLastAccountNo() {
+		return userDao.getLastAccountNo();
+	}
+
+	@Transactional
+	public List<ExchangeUser> getAllUsersWithoutAccountNo() {
+		return userDao.getAllUsersWithoutAccountNo();
+	}
+
 }

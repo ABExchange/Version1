@@ -58,5 +58,10 @@ public interface TradeOrderService extends BaseService<TradeOrder> {
 	 * **/
 	public List<TradeOrder> findAllUnclosed(OrderStatus orderStatus,
 			ExchangeUser exchangeUser);
+	
+	public List<TradeOrder> findAll(Symbol symbol, ExchangeUser exchangeUser);
+	public List<TradeOrder> findAll(Symbol symbol);
+	public List<TradeOrder> findAll(ExchangeUser exchangeUser);
+
 
 }

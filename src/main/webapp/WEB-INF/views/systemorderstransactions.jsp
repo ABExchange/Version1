@@ -81,10 +81,9 @@
 			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB:  ¥<fmt:formatNumber pattern="####.##" value="${rmbBalance}" maxFractionDigits="2" /></span> </div><br/>	
 			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $<fmt:formatNumber pattern="####.##" value="${usdBalance}" maxFractionDigits="2" /></span></div>
 			</div>	
-	<span>
-			<a href="/user/logout">
+
+			<span>
 			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
-			</a>
 			</span>	
 			</div>
 		</div>
@@ -110,11 +109,6 @@
 				<span class="tradebutton"> <a
 					href="${pageContext.request.contextPath}/admin">ADMIN</a></span>
 			</div>
-			
-			<div class="span2">
-				<span class="tradebutton"> <a
-					href="${pageContext.request.contextPath}/systemorders">All Orders History</a></span>
-			</div>
 		</div>
 		<hr class="loggedinhr" />
 
@@ -123,10 +117,10 @@
 			<br />
 			<div class="span2">
 				<div class="nav nav-tabs">
-					<span class="marketUSD active"><a class="accountbuttons"
+					<!--span class="marketUSD"><a class="accountbuttons"
 						href="">USD</a></span> <br /> <span class="marketCAD"><a
-						class="accountbuttons" href="">CAD</a></span> <br /> <span
-						class="marketHistory "><a class="accountbuttons" href="">Market
+						class="accountbuttons" href="">CAD</a></span --> <br /> <span
+						class="marketHistory active"><a class="accountbuttons" href="">Market
 							History </a></span> <br />
 					<!--span class="allOpenOrders"><a class="accountbuttons" href="">All Open Orders </a></span> <br/ -->
 				</div>
@@ -141,261 +135,13 @@
 			</div>
 			<div class="span10">
 				<!-- Trade form was removed from here -->
-				<div class="market marketUSD">
-					<h3>USD/BTC Rates</h3>
-					<div class="row">
-						<div class="span3">
-							<!-- Latest Trades Start-->
-							<h3 class="marketheader">LATES TRADES</h3>
-							<c:if test="${not empty listUSDTransaction}">
 
-								<table class="table table-striped bordertable">
-									<tr>
-										<td class="highersell ">BTC</td>
-										<td class="highersell ">PRICE/BTC</td>
-										<td class="highersell ">TOTAL</td>
-										<td class="highersell ">EXECUTED</td>
+				<!-- Start Market History
+				class="market marketHistory"
+				 -->
 
-									</tr>
-
-									<c:forEach items="${listUSDTransaction}" var="orderTransaction">
-										<tr>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
-
-
-											<td>
-												<!-- c:out value="${orderTransaction.btcRate.rate}" /--> <fmt:formatNumber
-													pattern="###.####" value="${orderTransaction.btcRate.rate}"
-													maxFractionDigits="4" />
-											</td>
-											<td>
-												<!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber
-													pattern="####.####" value="${orderTransaction.total}"
-													maxFractionDigits="4" /> <!-- fmt:formatNumber pattern="###.##" value="${orderTransaction.total}" / -->
-											</td>
-											<td><c:out value="${orderTransaction.created}" /></td>
-										</tr>
-									</c:forEach>
-
-
-								</table>
-								<!-- Latest Trades End-->
-							</c:if>
-							<c:if test="${empty listUSDTransaction}">
-								There are no Transactions yet. 
-	  							</c:if>
-
-						</div>
-
-						<div class="span3">
-							<!-- Buy Orders Start -->
-							<br />
-							<h3 class="marketheader">BUY ORDERS</h3>
-							<br />
-
-							<c:if test="${not empty listUSDBuyOrder}">
-								<table class="table table-striped bordertable middletable">
-									<tr>
-										<td class="highersell">STATUS</td>
-										<td class="highersell">PRICE</td>
-										<td class="highersell">QTY</td>
-										<td class="highersell">TOTAL</td>
-
-									</tr>
-
-									<c:forEach items="${listUSDBuyOrder}" var="tradeOrder">
-										<tr>
-											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${tradeOrder.price}" /></td>
-											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
-										</tr>
-									</c:forEach>
-
-								</table>
-							</c:if>
-							<c:if test="${empty listUSDBuyOrder}">
-								There are no Buy Orders Yet. 
-	  							</c:if>
-						</div>
-
-						<div class="span3">
-							<!-- Buy Orders End -->
-
-							<!-- Sell Orders Start -->
-
-							<h3 class="marketheader">SELL ORDERS</h3>
-							<c:if test="${not empty listUSDSellOrder}">
-
-								<table class="table table-striped bordertable">
-									<tr>
-										<td class="highersell">STATUS</td>
-										<td class="highersell">PRICE</td>
-										<td class="highersell">QTY</td>
-										<td class="highersell">TOTAL</td>
-
-									</tr>
-
-									<c:forEach items="${listUSDSellOrder}" var="tradeOrder">
-										<tr>
-											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${tradeOrder.price}" /></td>
-											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
-										</tr>
-									</c:forEach>
-
-								</table>
-							</c:if>
-							<c:if test="${empty listUSDSellOrder}">
-								<table class="table table-striped bordertable">
-									<tr>
-										<td>There are no Sell Orders Yet</td>
-									</tr>
-								</table>
-							</c:if>
-
-						</div>
-
-					</div>
-
-					<!-- Sell Orders End -->
-
-
-
-				</div>
-
-				<div class="market marketCAD">
-					<!-- Start CAD -->
-					<h3>CAD/BTC Rates</h3>
-					<div class="row rowmarket">
-						<div class="span3">
-							<!-- Latest Trades Start-->
-							<h3 class="marketheader">LATES TRADES</h3>
-							<c:if test="${not empty listCADTransaction}">
-
-								<table class="table table-striped bordertable">
-									<tr>
-										<td class="highersell">BTC</td>
-										<td class="highersell">PRICE/BTC</td>
-										<td class="highersell">TOTAL</td>
-										<td class="highersell">EXECUTED</td>
-
-									</tr>
-
-									<c:forEach items="${listCADTransaction}" var="orderTransaction">
-										<tr>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${orderTransaction.price / orderTransaction.btcRate.rate} " /></td>
-											<!-- td><c:out value="${orderTransaction.btcRate.rate}" /></td>
-											<td class="reducedtd"><c:out value="${orderTransaction.total}" /></td -->
-											<td>
-												<!-- c:out value="${orderTransaction.btcRate.rate}" /--> <!-- fmt:formatNumber  pattern="###.##" value="${orderTransaction.btcRate.rate}" maxFractionDigits="4"/ -->
-											</td>
-											<td>
-												<!-- c:out value="${orderTransaction.total}" / --> <fmt:formatNumber
-													pattern="###.####" value="${orderTransaction.total}"
-													maxFractionDigits="4" />
-											</td>
-
-											<td><c:out value="${orderTransaction.created}" /></td>
-										</tr>
-									</c:forEach>
-								</table>
-								<!-- Latest Trades End-->
-							</c:if>
-							<c:if test="${empty listCADTransaction}">
-								There are no Transactions yet. 
-	  							</c:if>
-						</div>
-						<div class="span3">
-							<!-- Buy Orders Start -->
-							<h3 class="marketheader">Buy Orders</h3>
-							<c:if test="${not empty listCADBuyOrder}">
-								<table class="table table-striped bordertable middletable">
-									<tr>
-										<td class="highersell">STATUS</td>
-										<td class="highersell">PRICE</td>
-										<td class="highersell">QTY</td>
-										<td class="highersell">TOTAL</td>
-
-									</tr>
-
-									<c:forEach items="${listCADBuyOrder}" var="tradeOrder">
-										<tr>
-											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${tradeOrder.price}" /></td>
-											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
-										</tr>
-									</c:forEach>
-
-								</table>
-							</c:if>
-							<c:if test="${empty listCADBuyOrder}">
-								There are no Buy Orders Yet. 
-	  							</c:if>
-							<!-- Buy Orders End -->
-
-						</div>
-						<div class="span3">
-							<!-- Sell Orders Start -->
-							<h3 class="marketheader">SELL Orders</h3>
-							<c:if test="${not empty listCADSellOrder}">
-
-								<table class="table table-striped bordertable lasttable">
-									<tr>
-										<td class="higersell">STATUS</td>
-										<td class="highersell">PRICE</td>
-										<td class="highersell">QTY</td>
-										<td class="highersell">TOTAL</td>
-
-									</tr>
-
-									<c:forEach items="${listCADSellOrder}" var="tradeOrder">
-										<tr>
-											<td><c:out value="${tradeOrder.orderStatus}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${tradeOrder.price}" /></td>
-											<td><c:out value="${tradeOrder.unfulfilledquantity}" /></td>
-											<td><fmt:formatNumber pattern="###.####"
-													value="${(tradeOrder.price * tradeOrder.unfulfilledquantity) + (tradeOrder.price * tradeOrder.unfulfilledquantity*0.005)}" /></td>
-										</tr>
-									</c:forEach>
-
-								</table>
-							</c:if>
-							<c:if test="${empty listCADSellOrder}">
-								<table class="table table-striped bordertable lasttable">
-									<tr>
-										<td>There are no Sell Yet.</td>
-									</tr>
-								</table>
-							</c:if>
-
-							<!-- Sell Orders End -->
-
-						</div>
-					</div>
-
-
-
-					<!-- End CAD -->
-				</div>
-
-				<!-- End Deposit -->
-
-				<!-- Start Market History -->
-
-				<div class="market marketHistory">
-					<h3>Trade History</h3>
+				<div >
+					<h3>Transanctions History</h3>
 					<table class="table table-striped">
 						<!-- thead>
 							<tr>
@@ -410,13 +156,17 @@
 						<tbody -->
 						<tr>
 							<td class="highersell">ORDER TYPE</td>
-							<!-- td class="highersell">STATUS</td -->
+							<td class="highersell">STATUS</td>
 							<td class="highersell">PRICE</td>
 							<td class="highersell">CURRENCY</td>
 							<td class="highersell">QUANTITY</td>
 							<td class="highersell">TOTAL</td>
 							<td class="highersell">FEE</td>
 							<td class="highersell">EXECUTED</td>
+							<td class="highersell">Created</td>
+							<td class="highersell">Created By</td>
+							<td class="highersell">Updated</td>
+							<td class="highersell">Updated By</td>
 							<td class="highersell"></td>
 						</tr>
 						<c:if test="${not empty listOrderTransaction}">
@@ -424,7 +174,7 @@
 								<tr>
 									<td><c:out
 											value="${orderTransaction.tradeOrder.orderType}" /></td>
-									<!-- td><c:out value="${orderTransaction.tradeOrder.orderStatus}" /></td -->
+									<td><c:out value="${orderTransaction.tradeOrder.orderStatus}" /></td>
 									<td><c:out value="${orderTransaction.price}" /></td>
 									<td><c:out value="${orderTransaction.symbol}" /></td>
 									<td><c:out value="${orderTransaction.quantity}" /></td>
@@ -433,6 +183,14 @@
 
 									<td><fmt:formatDate value="${orderTransaction.created}"
 											type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+									<td><fmt:formatDate value="${orderTransaction.created}"
+											type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+									<td><c:out value="${orderTransaction.createdBy}" /></td>
+									<td><fmt:formatDate value="${orderTransaction.updated}"
+											type="both" pattern="dd MMMM yyyy h:mm:ss" /></td>
+									<td><c:out value="${orderTransaction.updatedBy}" /></td>
+											
+											
 									<td><a href="#">Delete</a></td>
 								</tr>
 							</c:forEach>

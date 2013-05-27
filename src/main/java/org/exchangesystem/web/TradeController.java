@@ -10,6 +10,7 @@ import org.exchangesystem.model.OrderType;
 import org.exchangesystem.model.Symbol;
 import org.exchangesystem.model.TradeOrder;
 import org.exchangesystem.model.TradeStatus;
+import org.exchangesystem.service.AccountService;
 import org.exchangesystem.service.OrderTransactionService;
 import org.exchangesystem.service.SymbolService;
 import org.exchangesystem.service.TradeOrderService;
@@ -33,6 +34,9 @@ public class TradeController {
 	
 	@Autowired
 	ExchangeSystemSession exchangeSystemSession;
+	
+	@Autowired
+	AccountService accountService;
 	
 	protected static Logger logger = Logger.getLogger(TradeController.class);
 	
@@ -82,8 +86,23 @@ public class TradeController {
 		//AVG
 		Double average = symbolService.getAverage(defaultSymbol);
 		model.addAttribute("average", average);
+		model.addAttribute("accountNo", (exchangeSystemSession.getUser().getAccountNumber() != null) ? exchangeSystemSession.getUser().getAccountNumber() : "");
 
 		
+		Symbol currencySymbol = symbolService.findSymbol("HKD");
+		Double hkdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("RMB");
+		Double rmbBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("USD");
+		Double usdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("BTC");
+		Double btcBalance = accountService.getBalance(currencySymbol);
+		
+		model.addAttribute("hkdBalance", hkdBalance);
+		model.addAttribute("rmbBalance", rmbBalance);
+		model.addAttribute("usdBalance", usdBalance);
+		model.addAttribute("btcBalance", btcBalance);
+
 		return "trade";
 	}
 	

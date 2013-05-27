@@ -5,9 +5,11 @@ import java.util.List;
 import org.exchangesystem.daoimp.ExchangeSystemSession;
 import org.exchangesystem.model.BTCRate;
 import org.exchangesystem.model.Country;
+import org.exchangesystem.model.ExchangeUser;
 import org.exchangesystem.model.Symbol;
 import org.exchangesystem.model.TradeStatus;
 import org.exchangesystem.model.TransferMethod;
+import org.exchangesystem.service.AccountService;
 import org.exchangesystem.service.BTCRateService;
 import org.exchangesystem.service.CountryService;
 import org.exchangesystem.service.ExchangeUserService;
@@ -37,9 +39,15 @@ public class AdminController {
 	BTCRateService btcRateService;
 	
 	@Autowired
+	ExchangeUserService userService;
+	
+	@Autowired
 	ExchangeSystemSession exchangeSystemSession;
 	
-	@RequestMapping(value="/admin", method=RequestMethod.GET)
+	@Autowired
+	AccountService accountService;
+	
+	@RequestMapping(value={"/admin"}, method=RequestMethod.GET)
 	public String getAdmin(@ModelAttribute("symbol") Symbol symbol, @ModelAttribute("country") Country country, @ModelAttribute("transferMethod") TransferMethod transferMethod, @ModelAttribute("btcRate") BTCRate btcRate,  Model model){
 		
 		List<Symbol> symbolList = symbolService.findAll();
@@ -90,7 +98,23 @@ public class AdminController {
 		Double average = symbolService.getAverage(defaultSymbol);
 		model.addAttribute("average", average);
 
+		model.addAttribute("accountNo", (exchangeSystemSession.getUser().getAccountNumber() != null) ? exchangeSystemSession.getUser().getAccountNumber() : "");
+
 		
+		Symbol currencySymbol = symbolService.findSymbol("HKD");
+		Double hkdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("RMB");
+		Double rmbBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("USD");
+		Double usdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("BTC");
+		Double btcBalance = accountService.getBalance(currencySymbol);
+		
+		model.addAttribute("hkdBalance", hkdBalance);
+		model.addAttribute("rmbBalance", rmbBalance);
+		model.addAttribute("usdBalance", usdBalance);
+		model.addAttribute("btcBalance", btcBalance);
+
 		return "admin";
 	}
 	
@@ -161,5 +185,29 @@ public class AdminController {
 		
 		return "redirect:/admin";
 	}
+	
+	@RequestMapping(value="/generateaccountnumbers", method=RequestMethod.GET)
+	public String generateAccountNumbers(){
+		
+		Long currentSequence = userService.getLastAccountNo();
+		String nextNo = "";
+		
+		for (ExchangeUser user : userService.getAllUsersWithoutAccountNo()) {
+			currentSequence = currentSequence + 1;
+			//Generate 
+			//nextNo = currentSequence.toString();
+			nextNo = String.format("%08d", currentSequence);
+			nextNo = "ABX"+nextNo;
+			
+			user.setAccountSequence(currentSequence);
+			user.setAccountNumber(nextNo);
+			userService.update(user); 
+			
+		}
+		
+		
+		return "redirect:/admin";
+	}
+	
 
 }

@@ -6,6 +6,7 @@ import org.exchangesystem.daoimp.ExchangeSystemSession;
 import org.exchangesystem.model.ExchangeUser;
 import org.exchangesystem.model.Symbol;
 import org.exchangesystem.model.TradeStatus;
+import org.exchangesystem.service.AccountService;
 import org.exchangesystem.service.SymbolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ public class ExchangeMainController {
 	@Autowired
 	SymbolService symbolService;
 	
+	@Autowired
+	AccountService accountService;
 	/***
 	 *The default page is here 
 	 **/
@@ -65,6 +68,22 @@ public class ExchangeMainController {
 		model.addAttribute("average", average);
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
+		
+		model.addAttribute("accountNo", ((exchangeSystemSession.getUser() != null) && (exchangeSystemSession.getUser().getAccountNumber() != null)) ? exchangeSystemSession.getUser().getAccountNumber() : "");
+
+		Symbol currencySymbol = symbolService.findSymbol("HKD");
+		Double hkdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("RMB");
+		Double rmbBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("USD");
+		Double usdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("BTC");
+		Double btcBalance = accountService.getBalance(currencySymbol);
+		
+		model.addAttribute("hkdBalance", hkdBalance);
+		model.addAttribute("rmbBalance", rmbBalance);
+		model.addAttribute("usdBalance", usdBalance);
+		model.addAttribute("btcBalance", btcBalance);
 		return "main";
 	}
 	
@@ -101,6 +120,22 @@ public class ExchangeMainController {
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
 		exchangeSystemSession.setTradeStatus(tradeStatus);
+		
+		model.addAttribute("accountNo", (exchangeSystemSession.getUser().getAccountNumber() != null) ? exchangeSystemSession.getUser().getAccountNumber() : "");
+
+		Symbol currencySymbol = symbolService.findSymbol("HKD");
+		Double hkdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("RMB");
+		Double rmbBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("USD");
+		Double usdBalance = accountService.getBalance(currencySymbol);
+		currencySymbol = symbolService.findSymbol("BTC");
+		Double btcBalance = accountService.getBalance(currencySymbol);
+		
+		model.addAttribute("hkdBalance", hkdBalance);
+		model.addAttribute("rmbBalance", rmbBalance);
+		model.addAttribute("usdBalance", usdBalance);
+		model.addAttribute("btcBalance", btcBalance);
 		return "main";
 	}
 	
@@ -137,6 +172,9 @@ public class ExchangeMainController {
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
 		exchangeSystemSession.setTradeStatus(tradeStatus);
+		
+		model.addAttribute("accountNo", ((exchangeSystemSession.getUser() != null) && (exchangeSystemSession.getUser().getAccountNumber() != null)) ? exchangeSystemSession.getUser().getAccountNumber() : "");
+
 		return "home";
 	}
 	
@@ -173,6 +211,9 @@ public class ExchangeMainController {
 		
 		model.addAttribute("user", exchangeSystemSession.getUser());
 		exchangeSystemSession.setTradeStatus(tradeStatus);
+		
+		model.addAttribute("accountNo", ((exchangeSystemSession.getUser() != null) && (exchangeSystemSession.getUser().getAccountNumber() != null)) ? exchangeSystemSession.getUser().getAccountNumber() : "");
+
 		return "home";
 	}
 }

@@ -36,6 +36,8 @@ public interface TradeOrderDao extends Dao<TradeOrder> {
 	public List<TradeOrder> findOpenAndPartialSellOrders(Symbol symbol,
 			OrderType orderType, OrderStatus orderStatus, OrderStatus orderStatusPartial, Double price);
 
-	
+	public List<TradeOrder> findAll(Symbol symbol, ExchangeUser exchangeUser);
+	public List<TradeOrder> findAll(Symbol symbol);
+	public List<TradeOrder> findAll(ExchangeUser exchangeUser);
 
 }

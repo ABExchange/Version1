@@ -17,6 +17,10 @@ public interface ExchangeUserService {
 	
 	public ExchangeUser saveReturnEntity(final ExchangeUser exchangeUser);
 	public ExchangeUser findUser(String email);
+	
+	public Long getLastAccountNo();
+	public List<ExchangeUser> getAllUsersWithoutAccountNo();
+
 
 
 }

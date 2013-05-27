@@ -75,16 +75,20 @@
   		<div class="span6 mainlogincontainer mainlogincontainertextalign">
 			<span>Hi! <c:out value="${user}"></c:out></span>
 			<br/>
-			<span>ACCOUNT NUMBER: XXXXXXXXXX</span>
+			<span>ACCOUNT NUMBER: <c:out value="${accountNo}"></c:out></span>
 			<br/>
-			<span>MY WALLET : XXXXXXX BTC</span>
-			<div>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $XXXXX.xx</span></div><br/>
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB: $XXXXX.xx</span> </div><br/>	
-			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $XXXXX.xx</span></div>
+			<span>MY WALLET : <fmt:formatNumber pattern="####.##" value="${btcBalance}" maxFractionDigits="2" /> BTC</span>
+				<div>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagh.png"> </span>	<span  style="float: right;">HKD: $<fmt:formatNumber pattern="####.##" value="${hkdBalance}" maxFractionDigits="2" /></span></div><br/>
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagc.png"> </span>	<span style="float: right;">RMB:  ¥<fmt:formatNumber pattern="####.##" value="${rmbBalance}" maxFractionDigits="2" /></span> </div><br/>	
+			<div><span><img alt="" src="${pageContext.request.contextPath}/images/flagu.png"> </span>	<span  style="float: right;">USD: $<fmt:formatNumber pattern="####.##" value="${usdBalance}" maxFractionDigits="2" /></span></div>
+			
 			</div>	
-			<span>
+
+				<span>
+			<a href="/user/logout">
 			<img src="${pageContext.request.contextPath}/images/reallogout.png" alt="Logout"/>
+			</a>
 			</span>	
   		</div>
   	</div>
@@ -94,7 +98,11 @@
  		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/trade">TRADE</a></span></div>
  		<div class="span2"><span class="tradebutton"><a href="${pageContext.request.contextPath}/markets">MARKET</a></span></div>
  		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/FAQ">FAQ</a></span></div>
- 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/admin">ADMIN</a></span></div> 
+ 		<div class="span2"><span class="tradebutton"> <a href="${pageContext.request.contextPath}/admin">ADMIN</a></span></div>
+ 		<div class="span2">
+				<span class="tradebutton"> <a
+					href="${pageContext.request.contextPath}/systemorders">All Orders History</a></span>
+			</div> 
   	</div>
   	<hr class="loggedinhr"/>
 

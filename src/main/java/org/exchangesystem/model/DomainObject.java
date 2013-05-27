@@ -41,7 +41,7 @@ public class DomainObject implements Serializable{
 	private Timestamp updated;
 	
 	@Column(length=1)
-	private String isactive;
+	protected String isactive;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="updatedby")

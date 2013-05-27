@@ -1062,6 +1062,24 @@ public class TradeOrderServiceImp implements TradeOrderService {
 		return tradeOrderDao.findAllUnclosed(orderStatus, exchangeUser);
 	}
 
+	@Transactional
+	public List<TradeOrder> findAll(Symbol symbol, ExchangeUser exchangeUser) {
+		// TODO Auto-generated method stub
+		return tradeOrderDao.findAll(symbol, exchangeUser);
+	}
+
+	@Transactional
+	public List<TradeOrder> findAll(Symbol symbol) {
+		// TODO Auto-generated method stub
+		return tradeOrderDao.findAll(symbol);
+	}
+
+	@Transactional
+	public List<TradeOrder> findAll(ExchangeUser exchangeUser) {
+		// TODO Auto-generated method stub
+		return tradeOrderDao.findAll(exchangeUser);
+	}
+
 	
 
 }
